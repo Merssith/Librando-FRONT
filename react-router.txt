@@ -17,4 +17,6 @@ App
         /checkout <Carrito> (tabla con los productos guardados en redux, total, boton pagar (si estás logueado) )
         /user <User> info del usario, boton historial ordenes, ver reviews
     </Routes>
-</section>
+
+
+</section
