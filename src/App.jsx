@@ -1,7 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router";
-
+import Grid from "./commons/Grid";
 import Home from "./components/Home";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
@@ -10,6 +11,9 @@ import Signup from "./components/Signup";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+
+
+
 
 const App = () => {
   return (
@@ -23,6 +27,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+               <Route path=":type" element={<Grid />} />
             </Routes>
           </Col>
         </Row>
