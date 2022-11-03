@@ -2,6 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router";
 import Grid from "./commons/Grid";
 import Home from "./components/Home";
+import Content from "./components/Content.jsx"
+
+
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -15,9 +18,11 @@ import Col from "react-bootstrap/Col";
 
 
 
+
 const App = () => {
   return (
     <div>
+
       <Navbar />
       <Container fluid="md">
         <Row className="justify-content-md-center">
@@ -27,7 +32,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-               <Route path=":type" element={<Grid />} />
+              <Route path=":type" element={<Grid />} />
+              <Route path="/book" element={<Content />} />
             </Routes>
           </Col>
         </Row>
