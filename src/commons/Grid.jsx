@@ -3,14 +3,20 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CardBook from "./Card";
-import { useState, useEffect } from "react";
+import Pagination from "react-bootstrap/Pagination";
+
+/* import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
+import { Link } from "react-router-dom"; */
 
 const Grid = () => {
+  /*  const { type } = useParams();
+  console.log(type)
+
   const [libros, setLibros] = useState([]);
 
-  const { type } = useParams();
+
 
   useEffect(() => {
     axios
@@ -20,9 +26,9 @@ const Grid = () => {
         console.log(books);
         setLibros(books);
       });
-  }, [type]);
+  }, [type]); */
 
-  /*  const books = [
+  const books = [
     {
       title: "principito",
       description:
@@ -71,18 +77,36 @@ const Grid = () => {
         "Lorem ipsum dolor sit amet consectetur adipisicing . Eos omnis repellendus atque quam dolor",
       url: "https://resizer.glanacion.com/resizer/s0kuqv-yZbYKTe0ul-1r9jfSuVQ=/310x0/filters:format(webp):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/PX24AK5IOFCYHJUISPWO42BQAA.png",
     },
-  ]; */
+  ];
+
+  let active = 2;
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>
+    );
+  } 
 
   return (
-    <Container>
-      <Row>
-        {libros.map((book, i) => (
-          <Col lg={3} md={6} key={i}>
-            <CardBook book={book} />
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <div>
+      <div>
+        <Pagination size="lg">{items}</Pagination>
+        <br />
+      </div>
+      <Container>
+        <Row>
+          {books.map((book, i) => (
+            <Col lg={6} md={6} key={i}>
+              {/*  <Link to= {`/book/${book.title}`} > */}
+              <CardBook book={book} />
+              {/* </Link> */}
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </div>
   );
 };
 
