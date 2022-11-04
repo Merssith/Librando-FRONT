@@ -23,7 +23,7 @@ const NavBar = () => {
               alt=""
               width="30"
               height="24"
-              class="d-inline-block align-text-top"
+              className="d-inline-block align-text-top"
             />
             Librando
           </Navbar.Brand>
@@ -38,8 +38,7 @@ const NavBar = () => {
                 <NavDropdown
                   title="Libros"
                   id="basic-nav-dropdown"
-                  className="me-2"
-                >
+                  className="me-2">
                   <NavDropdown.Item href="/books/accion">
                     Accion
                   </NavDropdown.Item>
@@ -76,7 +75,7 @@ const NavBar = () => {
                   alt="Checkout"
                 />
               </Nav.Link>
-              {user.id ? (
+              {user.userId ? (
                 <>
                   <Nav.Link href="/user">
                     <Button size="sm">{user.name}</Button> {/* cambiar boton */}

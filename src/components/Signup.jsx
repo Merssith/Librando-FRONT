@@ -43,21 +43,21 @@ const Signup = () => {
         ])
       );
       axios
-        .post("/register", {
-          name,
-          lastname,
-          email,
-          password,
-          dni,
+        .post("http://localhost:3001/api/users/register", {
+          name: name.value,
+          lastname: lastname.value,
+          email: email.value,
+          password: password.value,
+          dni: dni.value,
           address,
         })
         .then((res) => res.data)
-        .then(({ email, password }) => {
+        .then(({ email }) => {
           // tras el registro hacemos login automatico y redirigimos a home
-          dispatch(sendLoginRequest({ email, password }));
+          dispatch(sendLoginRequest({ email, password: password.value }));
           navigate("/");
         })
-        .catch(() => alert("Failed register!"));
+        .catch((error) => console.log(error));
     }
     setValidated(true);
   };

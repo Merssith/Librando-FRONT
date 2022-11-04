@@ -8,11 +8,11 @@ export const sendLoginRequest = createAsyncThunk(
   "USER_LOGIN",
   ({ email, password }) => {
     return axios
-      .post("/api/login", { email, password }) /* ver ruta back */
+      .post("http://localhost:3001/api/users/login", { email, password }) /* ver ruta back */
       .then((res) => res.data)
       .then((user) => user) // guardamos en el estado info de user del back {id, name, lastname, email }
-      .catch(() => {
-        alert("Error: user or password incorrect");
+      .catch((error) => {
+        console.log(`LOG IN ERROR`, error);
       });
   }
 );

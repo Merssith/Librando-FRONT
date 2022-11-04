@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLoginRequest } from "../state/user";
-
+import axios from "axios"
 import useInput from "../hooks/useInput";
 
 import { Button, Form, FloatingLabel } from "react-bootstrap";
@@ -22,8 +22,13 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // seteamos el user en redux y redirigimos al home si todo va bien
-    dispatch(
-      sendLoginRequest({ email: email.value, password: password.value })
+    axios
+      .post("http://localhost:3001/api/users/login", { email: email.value, password: password.value }) /* ver ruta back */
+      .then((res) => res.data)
+      .then((user) => user) // guardamos en el estado info de user del back {id, name, lastname, email }
+      .catch((error) => {
+        console.log(`LOG IN ERROR`, error);
+      }
     ).then(() => navigate("/"));
   };
 

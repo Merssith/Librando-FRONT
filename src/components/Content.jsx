@@ -10,12 +10,12 @@ const Content = () => {
 
   useEffect(() => {
     axios
-      .get(`/api/book/:${id}`)
+      .get(`http://localhost:3001/api/books/${id}`)
       .then((res) => res.data)
       .then((book) => {
         setLibro(book);
       });
-  }, [title]);
+  }, [id]);
 
   return (
     <div>
