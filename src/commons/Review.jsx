@@ -1,31 +1,31 @@
 import React from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Card, ListGroup } from 'react-bootstrap'
 
 
 const Review = () => {
   return (
-    
+//input para agregar review
+  <>
     <Form>
     <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Form.Label>Email address</Form.Label>
-      <Form.Control type="email" placeholder="Enter email" />
-      <Form.Text className="text-muted">
-        We'll never share your email with anyone else.
-      </Form.Text>
-    </Form.Group>
-
-    <Form.Group className="mb-3" controlId="formBasicPassword">
-      <Form.Label>Password</Form.Label>
-      <Form.Control type="password" placeholder="Password" />
-    </Form.Group>
-    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-      <Form.Check type="checkbox" label="Check me out" />
+      <Form.Label>Dejar reseña</Form.Label>
+      <Form.Control type="text" placeholder="Enter email" />
     </Form.Group>
     <Button variant="primary" type="submit">
-      Submit
+      Enviar
     </Button>
   </Form>
-    
+  <br></br>
+ {/* //reviews ya dejadas */}
+
+ <Card >
+      <ListGroup variant="flush">
+        <ListGroup.Item>   
+          <strong>Juanito Acosta</strong></ListGroup.Item>
+        <ListGroup.Item>Reseña</ListGroup.Item>
+      </ListGroup>
+    </Card>
+ </>
   )
 }
 
