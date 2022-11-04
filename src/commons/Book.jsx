@@ -26,7 +26,7 @@ function Book({book}) {
                 <strong>Genero:</strong> {book.genre}
               </p>
               <p className="border">
-                <strong>Descripcion:</strong> {book.description}
+                <strong>Descripción:</strong> {book.description}
               </p>
               <p className="border">
                 <strong>Editorial:</strong> {book.editorial}
@@ -38,7 +38,7 @@ function Book({book}) {
                 <strong>Stock:</strong> {book.stock}
               </p>
               <p className="border">
-                <strong>Precio:</strong> {book.price}
+                <strong>Precio:</strong> ${book.price}
               </p>
               <div>
                 {" "}

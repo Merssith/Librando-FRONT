@@ -8,6 +8,7 @@ import Content from "./components/Content.jsx";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Signup from "./components/Signup";
 
 import { Container, Row, Col } from "react-bootstrap";
@@ -28,8 +29,7 @@ const App = () => {
               <Route path="/signup" element={<Signup />} />  
               <Route path="/book/:id" element={<Content />} />
               <Route path="/books/:type" element={<Grid />} />
-        
-
+              <Route path="/logout" element={<Logout />} />
             </Routes>
           </Col>
         </Row>

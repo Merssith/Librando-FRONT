@@ -22,14 +22,8 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // seteamos el user en redux y redirigimos al home si todo va bien
-    axios
-      .post("http://localhost:3001/api/users/login", { email: email.value, password: password.value }) /* ver ruta back */
-      .then((res) => res.data)
-      .then((user) => user) // guardamos en el estado info de user del back {id, name, lastname, email }
-      .catch((error) => {
-        console.log(`LOG IN ERROR`, error);
-      }
-    ).then(() => navigate("/"));
+    dispatch(sendLoginRequest({email: email.value, password: password.value}))
+    .then(()=>navigate("/"))
   };
 
   return (

@@ -17,12 +17,12 @@ export const sendLoginRequest = createAsyncThunk(
   }
 );
 
-export const sendLogutRequest = createAsyncThunk("USER_LOGOUT", () => {
+export const sendLogoutRequest = createAsyncThunk("USER_LOGOUT", () => {
   return axios
-    .post("/api/logout")
+    .post("http://localhost:3001/api/users/logout")
     .then(() => initialState) // guardamos en el estado el estado inicial {}
-    .catch(() => {
-      alert("Error: logout problem");
+    .catch((error) => {
+      console.log(`LOG OUT ERROR`, error);
     });
 });
 
@@ -39,7 +39,7 @@ export const sendLogutRequest = createAsyncThunk("USER_LOGOUT", () => {
 
 const userReducer = createReducer(initialState, {
   [sendLoginRequest.fulfilled]: (state, action) => action.payload,
-  [sendLogutRequest.fulfilled]: (state, action) => action.payload,
+  [sendLogoutRequest.fulfilled]: (state, action) => action.payload,
   //  [getUserCookie.fulfilled]: (state, action) => action.payload,
 });
 
