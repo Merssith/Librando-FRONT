@@ -1,53 +1,64 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { sendLoginRequest } from "../state/user";
 
 import useInput from "../hooks/useInput";
 
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { Button, Form, FloatingLabel } from "react-bootstrap";
 
 const Login = () => {
   const email = useInput();
   const password = useInput();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  // si ya hay un usuario logueado redirige a home
+  useEffect(() => {
+    if (user.id) navigate("/");
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("pendiente funcionalidad");
-    navigate("/");
+    // seteamos el user en redux y redirigimos al home si todo va bien
+    dispatch(
+      sendLoginRequest({ email: email.value, password: password.value })
+    ).then(() => navigate("/"));
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <FloatingLabel label="Enter email" className="mb-3">
-          {/*incluimos propiedades value y onChange de email => useInput hook => (useState) */}
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            {...email}
-            required
-          />
-        </FloatingLabel>
-      </Form.Group>
+    <>
+      <h2 className="mb-5">Login to your account</h2>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <FloatingLabel label="Enter email" className="mb-3">
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              // incluimos propiedades value y onChange de email => useInput hook => (useState)
+              {...email}
+              required
+            />
+          </FloatingLabel>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <FloatingLabel label="Password" className="mb-3">
-          {/*incluimos propiedades value y onChange de password => useInput hook => (useState) */}
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            {...password}
-            required
-          />
-        </FloatingLabel>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <FloatingLabel label="Password" className="mb-3">
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              {...password}
+              required
+            />
+          </FloatingLabel>
+        </Form.Group>
 
-      <Button variant="primary" size="lg" type="submit">
-        Log In
-      </Button>
-    </Form>
+        <Button variant="primary" type="submit">
+          Log In
+        </Button>
+      </Form>
+    </>
   );
 };
 
