@@ -1,53 +1,48 @@
 import { Container, Col, Row, Stack, Button } from "react-bootstrap";
 
-function Book() {
+function Book({book}) {
   return (
     <div style={{ padding: "5%" }}>
       <Container>
         <Row blue>
           <h1 className="border" style={{ textAlign: "center" }}>
-            TITULO
+            {book.title}
           </h1>
         </Row>
 
         <Row>
           <Col>
             <img
-              src="https://m.media-amazon.com/images/I/61USGoQGftL._SL500_.jpg"
+              src={book.front}
               alt="img"
             ></img>
           </Col>
           <Col>
             <Stack gap={2}>
               <p className="border">
-                <strong>Autor:</strong> Pablo Neruda
+                <strong>Autor:</strong> {book.author}
               </p>
               <p className="border">
-                <strong>Genero:</strong> Romance
+                <strong>Genero:</strong> {book.genre}
               </p>
               <p className="border">
-                <strong>Descripcion:</strong> Robert Louis Stevenson es un autor
-                bestseller, ha escrito libros famosos como: El náufrago, El
-                extraño caso del Dr. Jekyll y Mr Hyde, y La isla del tesoro. Sus
-                libros han sido vendidos a nivel mundial, y son considerados
-                como clásicos de literatura.
+                <strong>Descripcion:</strong> {book.desccription}
               </p>
               <p className="border">
-                <strong>Editorial:</strong> Susaeta
+                <strong>Editorial:</strong> {book.editorial}
               </p>
               <p className="border">
                 <strong>Rate:</strong> ⭐⭐⭐⭐
               </p>
               <p className="border">
-                <strong>Stock:</strong> 50 u
+                <strong>Stock:</strong> {book.stock}
               </p>
               <p className="border">
-                <strong>Precio:</strong> $250
+                <strong>Precio:</strong> {book.price}
               </p>
               <div>
                 {" "}
                 <Button variant="primary">Agregar al carrito 🛒</Button>{" "}
-                <Button variant="secondary">Like ♥️</Button>
               </div>
             </Stack>
           </Col>
