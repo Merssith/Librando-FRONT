@@ -1,39 +1,58 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router";
 import Grid from "./commons/Grid";
 import Home from "./components/Home";
 import Content from "./components/Content.jsx";
-//import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Signup from "./components/Signup";
+import AdminPanel from "./components/AdminPanel";
+import User from "./components/User";
+import Cart from "./components/Cart";
 
 import { Container, Row, Col } from "react-bootstrap";
+import { getUserCookie } from "./state/user";
 
 const App = () => {
-  //const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserCookie());
+  }, [dispatch]);
+
+  const user = useSelector((state) => state.user);
 
   return (
     <div>
       <Navbar />
-      <Container fluid="md">
-        <Row className="justify-content-md-center my-4">
-          {/*<Col md={4}> Para mostrar Sidebar si usuario es administrador </Col>*/}
-          <Col md={9}>
+      <Row className="justify-content-md-center">
+        {user.isAdmin ? (
+          <Col md={3} className="text-bg-secondary p-3">
+            <AdminPanel />
+          </Col>
+        ) : (
+          ""
+        )}
+        <Col md={9}>
+          <Container fluid="md my-4">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />  
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/user" element={<User />} />
               <Route path="/book/:id" element={<Content />} />
               <Route path="/books/:type" element={<Grid />} />
+              <Route path="/search/:type" element={<Grid />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/checkout" element={<Cart />} />
             </Routes>
-          </Col>
-        </Row>
-      </Container>
+          </Container>
+        </Col>
+      </Row>
       <Footer />
     </div>
   );

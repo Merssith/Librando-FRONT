@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLoginRequest } from "../state/user";
-import axios from "axios"
+
 import useInput from "../hooks/useInput";
 
 import { Button, Form, FloatingLabel } from "react-bootstrap";
@@ -22,8 +22,9 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // seteamos el user en redux y redirigimos al home si todo va bien
-    dispatch(sendLoginRequest({email: email.value, password: password.value}))
-    .then(()=>navigate("/"))
+    dispatch(
+      sendLoginRequest({ email: email.value, password: password.value })
+    ).then(() => navigate("/"));
   };
 
   return (
@@ -41,7 +42,6 @@ const Login = () => {
             />
           </FloatingLabel>
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <FloatingLabel label="Password" className="mb-3">
             <Form.Control
@@ -52,9 +52,11 @@ const Login = () => {
             />
           </FloatingLabel>
         </Form.Group>
-
         <Button variant="primary" type="submit">
           Log In
+        </Button>{" "}
+        <Button variant="info" type="submit">
+          Admin
         </Button>
       </Form>
     </>
