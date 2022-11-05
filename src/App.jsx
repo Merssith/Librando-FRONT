@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Signup from "./components/Signup";
 import AdminPanel from "./components/AdminPanel";
+import User from "./components/User";
 import Cart from "./components/Cart";
 
 import { Container, Row, Col } from "react-bootstrap";
@@ -18,20 +19,12 @@ import { getUserCookie } from "./state/user";
 
 const App = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getUserCookie())
-      .then((res) => res.payload)
-      .catch((error) => console.error());
-  });
+    dispatch(getUserCookie());
+  }, [dispatch]);
 
-  /*   const user = {
-    id: 1,
-    isAdmin: true,
-  }; */
-
-  // user.isAdmin = false;
+  const user = useSelector((state) => state.user);
 
   return (
     <div>
@@ -50,6 +43,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/user" element={<User />} />
               <Route path="/book/:id" element={<Content />} />
               <Route path="/books/:type" element={<Grid />} />
               <Route path="/search/:type" element={<Grid />} />

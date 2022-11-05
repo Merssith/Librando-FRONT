@@ -20,9 +20,11 @@ const NavBar = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
+  // para abrir y cerrar el panel lateral del carrito
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // funcionalidad botono "ir a pagar": cierra panel lateral y redirige
   const handleClick = () => {
     handleClose();
     navigate("/checkout");
@@ -100,7 +102,7 @@ const NavBar = () => {
                   onClick={() => navigate("/user")}
                 >
                   {user.name}
-                </Button>{" "}
+                </Button>
                 {/* cambiar boton */}
                 <Button
                   variant="secondary"
