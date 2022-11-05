@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import CartCanvas from "./CartCanvas";
 import {
   Container,
   Navbar,
@@ -7,102 +9,131 @@ import {
   NavDropdown,
   Button,
   Form,
-  Row,
+  Offcanvas,
 } from "react-bootstrap";
+
+import { novelGenres } from "../utils";
+import logo from "../assets/logo_texto_horizontal.png";
 
 const NavBar = () => {
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleClick = () => {
+    handleClose();
+    navigate("/checkout");
+  };
 
   return (
-    <Container fluid>
-      <Row>
-        <Nav className="justify-content-center bg-light">
-          <Navbar.Brand href="/home">
-            <img
-              src=""
-              alt=""
-              width="30"
-              height="24"
-              className="d-inline-block align-text-top"
+    <Navbar bg="light" expand="md">
+      <Container fluid>
+        <Navbar.Brand as={Link} to="/">
+          <img
+            src={logo}
+            alt=""
+            width="150"
+            height="auto"
+            className="d-inline-block align-text-top"
+          />
+        </Navbar.Brand>
+        <NavDropdown title="Novelas" id="basic-nav-dropdown" className="me-4">
+          {novelGenres.map((genre, i) => (
+            <NavDropdown.Item key={i} as={Link} to={`/books/${genre}`}>
+              {genre}
+            </NavDropdown.Item>
+          ))}
+          <NavDropdown.Divider />
+          <NavDropdown.Item as={Link} to={"/books/all"}>
+            Todos
+          </NavDropdown.Item>
+        </NavDropdown>
+
+        <Navbar.Toggle aria-controls="search-navbar-nav" />
+        <Navbar.Collapse
+          id="basic-navbar-nav"
+          className="justify-content-between"
+        >
+          <Form className="d-flex">
+            <Form.Control
+              size="sm"
+              type="search"
+              placeholder="Search"
+              className="me-2 mt-2"
+              aria-label="Search"
             />
-            Librando
-          </Navbar.Brand>
-        </Nav>
-      </Row>
-      <Row>
-        <Navbar bg="light" expand="sm">
-          <Container fluid>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav>
-                <NavDropdown
-                  title="Libros"
-                  id="basic-nav-dropdown"
-                  className="me-2">
-                  <NavDropdown.Item href="/books/accion">
-                    Accion
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/books/terror">
-                    Terror
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/books/romance">
-                    Romance
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="/books/all">Todos</NavDropdown.Item>
-                </NavDropdown>
-                <Form className="d-flex">
-                  <Form.Control
-                    size="sm"
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button variant="outline-success" size="sm">
-                    Search
-                  </Button>
-                </Form>
-              </Nav>
-            </Navbar.Collapse>
-            <Nav>
-              <Nav.Link href="/checkout">
-                <img
-                  src="https://w7.pngwing.com/pngs/225/984/png-transparent-computer-icons-shopping-cart-encapsulated-postscript-shopping-cart-angle-black-shopping.png"
-                  width="auto"
-                  height="30"
-                  className="d-inline-block align-top"
-                  alt="Checkout"
-                />
-              </Nav.Link>
-              {user.userId ? (
-                <>
-                  <Nav.Link href="/user">
-                    <Button size="sm">{user.name}</Button> {/* cambiar boton */}
-                  </Nav.Link>
-                  <Nav.Link href="/logout">
-                    <Button variant="secondary" size="sm">
-                      Log out
-                    </Button>
-                  </Nav.Link>
-                </>
-              ) : (
-                <>
-                  <Nav.Link href="/login">
-                    <Button size="sm">Acceso</Button>
-                  </Nav.Link>
-                  <Nav.Link href="/signup">
-                    <Button variant="secondary" size="sm">
-                      Registro
-                    </Button>
-                  </Nav.Link>
-                </>
-              )}
-            </Nav>
-          </Container>
-        </Navbar>
-      </Row>
-    </Container>
+            <Link to="/search">
+              <Button variant="outline-success" size="sm" className="mt-2">
+                Search
+              </Button>
+            </Link>
+          </Form>
+          <Nav>
+            <Button
+              variant="success"
+              size="sm"
+              onClick={handleShow}
+              className="me-2 mt-2"
+            >
+              Carrito
+            </Button>
+            <Offcanvas show={show} onHide={handleClose} placement="end">
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>Carrito</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body className="justify-content-center">
+                <CartCanvas />
+                <Button onClick={handleClick} size="sm">
+                  Ir a pagar
+                </Button>
+              </Offcanvas.Body>
+            </Offcanvas>
+            {user.id ? (
+              <>
+                <Button
+                  size="sm"
+                  variant="link"
+                  className="me-2 mt-2"
+                  onClick={() => navigate("/user")}
+                >
+                  {user.name}
+                </Button>{" "}
+                {/* cambiar boton */}
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="me-2 mt-2"
+                  onClick={() => navigate("/logout")}
+                >
+                  Log out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  size="sm"
+                  className="me-2 mt-2"
+                  onClick={() => navigate("/login")}
+                >
+                  Acceso
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="me-2 mt-2"
+                  onClick={() => navigate("/signup")}
+                >
+                  Registro
+                </Button>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

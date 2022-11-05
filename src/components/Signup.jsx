@@ -64,8 +64,8 @@ const Signup = () => {
 
   return (
     <>
-      <h2 className="is-title is-size-2">Sign up for an account</h2>
-      <p className="mb-5">Fill out the form below to get started.</p>
+      <h2 className="is-title is-size-2">Registrate</h2>
+      <p className="mb-5">Rellena el formulario para comenzar.</p>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
