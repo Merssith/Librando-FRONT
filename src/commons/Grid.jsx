@@ -8,11 +8,11 @@ import Pagination from "react-bootstrap/Pagination";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
 
 const Grid = () => {
   const { type } = useParams();
-  console.log(type)
+  console.log(type);
 
   const [libros, setLibros] = useState([]);
 
@@ -34,7 +34,7 @@ const Grid = () => {
         {number}
       </Pagination.Item>
     );
-  } 
+  }
 
   return (
     <div>
@@ -45,10 +45,8 @@ const Grid = () => {
       <Container>
         <Row>
           {libros.map((book, i) => (
-            <Col lg={6} md={6} key={i}>
-              <Link to= {`/book/${book.id}`} >
+            <Col lg={3} md={4} sm={6} key={i}>
               <CardBook book={book} />
-              </Link>
             </Col>
           ))}
         </Row>
