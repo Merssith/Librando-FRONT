@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <Container fluid>
       <Row>
-        <div className="bg-dark text-white text-center">
+        <div className="bg-color5 text-white text-center">
           Librando Team - Plataforma 5
         </div>
       </Row>

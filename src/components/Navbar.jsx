@@ -13,7 +13,7 @@ import {
 } from "react-bootstrap";
 
 import { novelGenres } from "../utils";
-import logo from "../assets/logo_texto_horizontal.png";
+import logo from "../assets/logo_texto_marron.png";
 
 const NavBar = () => {
   const user = useSelector((state) => state.user);
@@ -31,7 +31,7 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar bg="light" expand="md">
+    <Navbar bg="color3" expand="md">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -68,14 +68,14 @@ const NavBar = () => {
               aria-label="Search"
             />
             <Link to="/search">
-              <Button variant="outline-success" size="sm" className="mt-2">
+              <Button variant="outline-color5" size="sm" className="mt-2">
                 Search
               </Button>
             </Link>
           </Form>
           <Nav>
             <Button
-              variant="success"
+              variant="color5"
               size="sm"
               onClick={handleShow}
               className="me-2 mt-2"
@@ -97,7 +97,7 @@ const NavBar = () => {
               <>
                 <Button
                   size="sm"
-                  variant="link"
+                  variant="color5"
                   className="me-2 mt-2"
                   onClick={() => navigate("/user")}
                 >
@@ -105,7 +105,7 @@ const NavBar = () => {
                 </Button>
                 {/* cambiar boton */}
                 <Button
-                  variant="secondary"
+                  variant="color5"
                   size="sm"
                   className="me-2 mt-2"
                   onClick={() => navigate("/logout")}
@@ -116,6 +116,7 @@ const NavBar = () => {
             ) : (
               <>
                 <Button
+                variant = "color5"
                   size="sm"
                   className="me-2 mt-2"
                   onClick={() => navigate("/login")}
@@ -123,7 +124,7 @@ const NavBar = () => {
                   Acceso
                 </Button>
                 <Button
-                  variant="secondary"
+                  variant="color5"
                   size="sm"
                   className="me-2 mt-2"
                   onClick={() => navigate("/signup")}
