@@ -13,18 +13,23 @@ import Signup from "./components/Signup";
 import AdminPanel from "./components/AdminPanel";
 import User from "./components/User";
 import Cart from "./components/Cart";
+import AdminUsers from "./components/AdminUsers";
+import AdminBooks from "./components/AdminBooks";
+import AdminGenres from "./components/AdminGenres";
 
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
 
 const App = () => {
-  const dispatch = useDispatch();
+  /* const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUserCookie());
   }, [dispatch]);
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user); */
+
+  const user = { isAdmin: true };
 
   return (
     <div>
@@ -49,6 +54,9 @@ const App = () => {
               <Route path="/search/:type" element={<Grid />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/checkout" element={<Cart />} />
+              <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/books" element={<AdminBooks />} />
+              <Route path="/admin/genres" element={<AdminGenres />} />
             </Routes>
           </Container>
         </Col>
