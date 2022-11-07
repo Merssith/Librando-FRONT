@@ -3,16 +3,18 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 const CardBook = ({ book }) => {
   return (
-    //cuando Diego tenga listo su componente, envolvemos la cardBook en un Link y mostramos sus detalles
-    <Card style={{ width: "18rem" }}>
+    <Card >
       <Card.Img variant="top" src={book.front} />
       <Card.Body>
         <Card.Title>{book.title}</Card.Title>
-        <Card.Text>{book.description}</Card.Text>
-        <Button variant="primary">Mira mis detalles</Button>
+        <Card.Text>{book.description.slice(0, 150).concat("...")}</Card.Text>
+        <Link to={`/book/${book.id}`}>
+          <Button variant="primary">Mira mis detalles</Button>
+        </Link>
       </Card.Body>
     </Card>
   );
