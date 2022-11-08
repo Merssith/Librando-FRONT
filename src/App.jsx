@@ -20,6 +20,7 @@ import AdminGenres from "./components/AdminGenres";
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
 
+
 const App = () => {
   /* const dispatch = useDispatch();
 
@@ -57,6 +58,7 @@ const App = () => {
               <Route path="/admin/users" element={<AdminUsers />} />
               <Route path="/admin/books" element={<AdminBooks />} />
               <Route path="/admin/genres" element={<AdminGenres />} />
+              <Route path="/admin/users/createuser" element={<Signup/>} />
             </Routes>
           </Container>
         </Col>
