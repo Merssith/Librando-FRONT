@@ -29,13 +29,13 @@ const Login = () => {
 
   return (
     <>
-      <h2 className="mb-5">Login to your account</h2>
+      <h2 className="mb-4">Ingresa a tu cuenta</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <FloatingLabel label="Enter email" className="mb-3">
+          <FloatingLabel label="E-mail" className="mb-3">
             <Form.Control
               type="email"
-              placeholder="Enter email"
+              placeholder="E-mail"
               // incluimos propiedades value y onChange de email => useInput hook => (useState)
               {...email}
               required
@@ -43,21 +43,23 @@ const Login = () => {
           </FloatingLabel>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <FloatingLabel label="Password" className="mb-3">
+          <FloatingLabel label="Contraseña" className="mb-3">
             <Form.Control
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               {...password}
               required
             />
           </FloatingLabel>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <div class="logginButtons">
+        <Button variant="color5" type="submit">
           Log In
         </Button>{" "}
-        <Button variant="info" type="submit">
+        <Button variant="color3" type="submit">
           Admin
         </Button>
+        </div>
       </Form>
     </>
   );

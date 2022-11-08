@@ -1,51 +1,91 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { Container, Col, Row, Stack, Button } from "react-bootstrap";
 
-function Book({book}) {
+function Book({ book }) {
+  const [quantity, setQuantity] = useState(0);
+  const [items, setItems] = useState([]);
+
+  const handlePlus = () => {
+    if (quantity < book.stock) setQuantity(quantity + 1);
+  };
+
+  const handleMinus = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleItems = () => {
+    let bookOrder = {quantity, bookId:book.id}
+    console.log(bookOrder)
+    setItems(items.push(bookOrder));
+    console.log(items)
+  };
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
+
   return (
-    <div style={{ padding: "5%" }}>
+    <div>
       <Container>
-        <Row blue>
-          <h1 className="border" style={{ textAlign: "center" }}>
+        <Row>
+          <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
             {book.title}
           </h1>
         </Row>
 
         <Row>
           <Col>
-            <img
-              src={book.front}
-              alt="img"
-            ></img>
+            <img src={book.front} alt="img"></img>
           </Col>
           <Col>
-            <Stack gap={2}>
-              <p className="border">
+            <Stack gap={1}>
+              <p>
                 <strong>Autor:</strong> {book.author}
               </p>
-              <p className="border">
+              <p>
                 <strong>Genero:</strong> {book.genre}
               </p>
-              <p className="border">
+              <p>
                 <strong>Descripción:</strong> {book.description}
               </p>
-              <p className="border">
+              <p>
                 <strong>Editorial:</strong> {book.editorial}
               </p>
-              <p className="border">
+              <p>
                 <strong>Rate:</strong> ⭐⭐⭐⭐
               </p>
-              <p className="border">
+              <p>
                 <strong>Stock:</strong> {book.stock}
               </p>
-              <p className="border">
+              <p>
                 <strong>Precio:</strong> ${book.price}
               </p>
-              <div>
-                {" "}
-                <Button variant="primary">Agregar al carrito 🛒</Button>{" "}
-              </div>
             </Stack>
           </Col>
+        </Row>
+
+        <Row>
+          <div style={{ textAlign: "center", margin: "20px" }}>
+            <p>
+              <strong>Cantidad:</strong>
+            </p>
+            <p>
+              <Button variant="color5" onClick={handleMinus}>
+                -
+              </Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{quantity}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button variant="color5" onClick={handlePlus}>
+                +
+              </Button>
+            </p>
+            <Button variant="color5" onClick={handleItems}>
+              Agregar al carrito
+            </Button>
+          </div>
         </Row>
       </Container>
     </div>

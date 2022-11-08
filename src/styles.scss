@@ -1,6 +1,8 @@
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 
+body { padding-top: 80px; }
+
 $custom-colors: (
   "color1": #ffd8b8,
   "color2": #ffb375,
@@ -29,6 +31,17 @@ img {
   max-height: 100%;
 }
 
+footer {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.min-heigh-view-port {
+  min-height: 100vw;
+}
+
 @media screen and (min-width: 576px) {
   .carousel-inner {
     display: flex;
@@ -46,6 +59,15 @@ img {
 
 .card {
   margin: 0 0.5em;
+}
+
+.logginButtons {
+  display: flex;
+  justify-content: space-between
+}
+
+.myNavbar{
+  background-image: var(--bs-gradient)
 }
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";

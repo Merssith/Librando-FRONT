@@ -70,7 +70,7 @@ const Signup = () => {
   return (
     <>
       <h2 className="is-title is-size-2">Registrate</h2>
-      <p className="mb-5">Rellena el formulario para comenzar.</p>
+      <p className="mb-4">Rellena el formulario para comenzar.</p>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -197,7 +197,7 @@ const Signup = () => {
             ""
           )}
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="color5" type="submit">
           Registro
         </Button>
       </Form>

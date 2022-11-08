@@ -15,7 +15,7 @@ import {
 
 import useInput from "../hooks/useInput";
 import { novelGenres } from "../utils";
-import logo from "../assets/logo_marron.png";
+import logo from "../assets/logo_texto_marron.png";
 
 const NavBar = () => {
   const user = useSelector((state) => state.user);
@@ -40,7 +40,7 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar bg="light" expand="md">
+    <Navbar bg="color3" expand="md" fixed="top" className="myNavbar">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -51,7 +51,7 @@ const NavBar = () => {
             className="d-inline-block align-text-top"
           />
         </Navbar.Brand>
-        <NavDropdown title="Novelas" id="basic-nav-dropdown" className="me-4">
+        <NavDropdown title="Géneros" id="basic-nav-dropdown" className="me-4">
           {novelGenres.map((genre, i) => (
             <NavDropdown.Item key={i} as={Link} to={`/books/${genre}`}>
               {genre}
@@ -78,23 +78,19 @@ const NavBar = () => {
               aria-label="Search"
               {...query}
             />
-            <Button
-              variant="outline-success"
-              type="submit"
-              size="sm"
-              className="mt-2"
-            >
-              Search
-            </Button>
+            <Link to="/search">
+              <Button variant="outline-color5" size="sm" className="mt-2" type="submit">
+                Search
+              </Button>
+            </Link>
           </Form>
           <Nav>
             <Button
-              variant="success"
+              variant="color5"
               size="sm"
               onClick={handleCanvasShow}
-              className="me-2 mt-2"
-            >
-              <i className="bi bi-cart3"></i>
+              className="me-2 mt-2">
+              🛒
             </Button>
             <Offcanvas show={show} onHide={handleCanvasClose} placement="end">
               <Offcanvas.Header closeButton>
@@ -111,7 +107,7 @@ const NavBar = () => {
               <>
                 <Button
                   size="sm"
-                  variant="light"
+                  variant="color5"
                   className="me-2 mt-2"
                   onClick={() => navigate("/user")}
                 >
@@ -119,7 +115,7 @@ const NavBar = () => {
                   {user.name}
                 </Button>
                 <Button
-                  variant="secondary"
+                  variant="color5"
                   size="sm"
                   className="me-2 mt-2"
                   onClick={() => navigate("/logout")}
@@ -130,6 +126,7 @@ const NavBar = () => {
             ) : (
               <>
                 <Button
+                variant = "color5"
                   size="sm"
                   className="me-2 mt-2"
                   onClick={() => navigate("/login")}
@@ -137,7 +134,7 @@ const NavBar = () => {
                   Acceso
                 </Button>
                 <Button
-                  variant="secondary"
+                  variant="color5"
                   size="sm"
                   className="me-2 mt-2"
                   onClick={() => navigate("/signup")}
