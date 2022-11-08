@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CardBook from "./Card";
-import Pagination from "react-bootstrap/Pagination";
+import Pagination from "./Pagination";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
@@ -14,6 +14,8 @@ const Grid = () => {
   console.log(type);
 
   const [libros, setLibros] = useState([]);
+  const [page, setPage] = useState(1);
+  const [forPage, setForPage] = useState(12);
 
   useEffect(() => {
     axios
@@ -25,31 +27,26 @@ const Grid = () => {
       });
   }, []);
 
-  let active = 2;
-  let items = [];
-  for (let number = 1; number <= 5; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>
-    );
-  }
+  const max = libros.length/forPage
 
   return (
     <div>
-      <div>
-        <Pagination size="lg">{items}</Pagination>
-        <br />
-      </div>
+      <div className="paginacion">
+     <Pagination page={page} setPage={setPage} max={max} />
+     </div>
+      <br/>
       <Container>
         <Row>
-          {libros.map((book, i) => (
+          {libros
+          .slice((page - 1) * forPage, (page - 1) * forPage + forPage)
+          .map((book, i) => (
             <Col lg={3} md={4} sm={6} key={i}>
               <CardBook book={book} />
             </Col>
           ))}
         </Row>
       </Container>
+      <br/>
     </div>
   );
 };

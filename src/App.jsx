@@ -22,6 +22,7 @@ import AdminOrders from "./components/AdminOrders";
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
 
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -59,6 +60,7 @@ const App = () => {
               <Route path="/admin/genres" element={<AdminGenres />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="/admin/orders/:id" element={<Order />} />
+              <Route path="/admin/users/createuser" element={<Signup/>} />
             </Routes>
           </Container>
         </Col>
