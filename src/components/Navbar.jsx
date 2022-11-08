@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 import CartCanvas from "./CartCanvas";
 import {
   Container,
@@ -12,22 +13,30 @@ import {
   Offcanvas,
 } from "react-bootstrap";
 
+import useInput from "../hooks/useInput";
 import { novelGenres } from "../utils";
 import logo from "../assets/logo_texto_marron.png";
 
 const NavBar = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const query = useInput();
   const [show, setShow] = useState(false);
 
+
   // para abrir y cerrar el panel lateral del carrito
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleCanvasClose = () => setShow(false);
+  const handleCanvasShow = () => setShow(true);
 
   // funcionalidad botono "ir a pagar": cierra panel lateral y redirige
-  const handleClick = () => {
-    handleClose();
+  const handleCanvasSubmit = () => {
+    handleCanvasClose();
     navigate("/checkout");
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search/${query.value}`);
   };
 
   return (
@@ -59,16 +68,18 @@ const NavBar = () => {
           id="basic-navbar-nav"
           className="justify-content-between"
         >
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control
+            
               size="sm"
               type="search"
               placeholder="Search"
               className="me-2 mt-2"
               aria-label="Search"
+              {...query}
             />
             <Link to="/search">
-              <Button variant="outline-color5" size="sm" className="mt-2">
+              <Button variant="outline-color5" size="sm" className="mt-2" type="submit">
                 Search
               </Button>
             </Link>
@@ -77,18 +88,17 @@ const NavBar = () => {
             <Button
               variant="color5"
               size="sm"
-              onClick={handleShow}
-              className="me-2 mt-2"
-            >
+              onClick={handleCanvasShow}
+              className="me-2 mt-2">
               🛒
             </Button>
-            <Offcanvas show={show} onHide={handleClose} placement="end">
+            <Offcanvas show={show} onHide={handleCanvasClose} placement="end">
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Carrito</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body className="justify-content-center">
                 <CartCanvas />
-                <Button onClick={handleClick} size="sm">
+                <Button onClick={handleCanvasSubmit} size="sm">
                   Ir a pagar
                 </Button>
               </Offcanvas.Body>
@@ -101,9 +111,9 @@ const NavBar = () => {
                   className="me-2 mt-2"
                   onClick={() => navigate("/user")}
                 >
+                  <i className="bi bi-person-circle"> </i>
                   {user.name}
                 </Button>
-                {/* cambiar boton */}
                 <Button
                   variant="color5"
                   size="sm"
