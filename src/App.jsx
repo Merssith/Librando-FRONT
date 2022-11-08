@@ -21,6 +21,7 @@ import AdminOrders from "./components/AdminOrders";
 
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
+import EditBook from "./commons/EditBook";
 
 
 const App = () => {
@@ -57,6 +58,8 @@ const App = () => {
               <Route path="/checkout" element={<Cart />} />
               <Route path="/admin/users" element={<AdminUsers />} />
               <Route path="/admin/books" element={<AdminBooks />} />
+              <Route path="/admin/books/edit/:id" element={<EditBook />} />
+              <Route path="/admin/books/create" element={<EditBook />} />
               <Route path="/admin/genres" element={<AdminGenres />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="/admin/orders/:id" element={<Order />} />
@@ -71,3 +74,4 @@ const App = () => {
 };
 
 export default App;
+
