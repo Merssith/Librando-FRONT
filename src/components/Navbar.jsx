@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 import CartCanvas from "./CartCanvas";
 import {
   Container,
@@ -20,6 +21,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
+
   // para abrir y cerrar el panel lateral del carrito
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -29,6 +31,7 @@ const NavBar = () => {
     handleClose();
     navigate("/checkout");
   };
+
 
   return (
     <Navbar bg="light" expand="md">
@@ -61,6 +64,7 @@ const NavBar = () => {
         >
           <Form className="d-flex">
             <Form.Control
+            
               size="sm"
               type="search"
               placeholder="Search"
