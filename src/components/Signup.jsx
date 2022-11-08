@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sendLoginRequest } from "../state/user";
 import axios from "axios";
 
@@ -10,6 +10,7 @@ import { joinAddress } from "../utils";
 import { Button, Col, Row, Form } from "react-bootstrap";
 
 const Signup = () => {
+  const user = useSelector((state) => state.user);
   const [validated, setValidated] = useState(false);
   const [address, setAddress] = useState("");
   const name = useInput();
@@ -23,8 +24,11 @@ const Signup = () => {
   const city = useInput();
   const state = useInput();
   const cpa = useInput();
+  const [admin, setAdmin] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  console.log(admin);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +54,7 @@ const Signup = () => {
           password: password.value,
           dni: dni.value,
           address,
+          isAdmin: admin,
         })
         .then((res) => res.data)
         .then(({ email }) => {
@@ -182,6 +187,15 @@ const Signup = () => {
             feedback="Debes aceptar para poder registrarte."
             feedbackType="invalid"
           />
+          {user.isAdmin ? (
+            <Form.Check
+              label="Permisos de administrador"
+              value={admin}
+              onChange={() => setAdmin(!admin)}
+            />
+          ) : (
+            ""
+          )}
         </Form.Group>
         <Button variant="primary" type="submit">
           Registro

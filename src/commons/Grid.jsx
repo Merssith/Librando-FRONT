@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 
-
 const Grid = () => {
   const { type } = useParams();
   console.log(type);
