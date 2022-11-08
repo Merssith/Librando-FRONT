@@ -31,7 +31,7 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar bg="color3" expand="md">
+    <Navbar bg="color3" expand="md" fixed="top" className="myNavbar">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -42,7 +42,7 @@ const NavBar = () => {
             className="d-inline-block align-text-top"
           />
         </Navbar.Brand>
-        <NavDropdown title="Novelas" id="basic-nav-dropdown" className="me-4">
+        <NavDropdown title="Géneros" id="basic-nav-dropdown" className="me-4">
           {novelGenres.map((genre, i) => (
             <NavDropdown.Item key={i} as={Link} to={`/books/${genre}`}>
               {genre}
@@ -80,7 +80,7 @@ const NavBar = () => {
               onClick={handleShow}
               className="me-2 mt-2"
             >
-              Carrito
+              🛒
             </Button>
             <Offcanvas show={show} onHide={handleClose} placement="end">
               <Offcanvas.Header closeButton>

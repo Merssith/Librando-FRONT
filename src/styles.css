@@ -1,4 +1,8 @@
 @charset "UTF-8";
+body {
+  padding-top: 80px;
+}
+
 .app {
   background-color: #ffd8b8;
   font-family: "Kanit", sans-serif;
@@ -31,6 +35,15 @@ img {
 
 .card {
   margin: 0 0.5em;
+}
+
+.logginButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.myNavbar {
+  background-image: var(--bs-gradient);
 }
 
 /*!

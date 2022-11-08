@@ -32,7 +32,7 @@ const App = () => {
   const user = { isAdmin: true };
 
   return (
-    <div class="ourFont">
+    <div className="app">
       <Navbar />
       <Row className="justify-content-md-center">
         {/* {user.isAdmin ? (
