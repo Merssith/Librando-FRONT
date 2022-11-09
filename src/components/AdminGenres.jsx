@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { InputGroup, Form, Button, Table } from "react-bootstrap";
 import useInput from "../hooks/useInput";
 
-const AdminGenres = () => {
+const AdminGenres = ({ user }) => {
   const [genres, setGenres] = useState([]);
   const newGenre = useInput();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (!user.isAdmin) navigate("/");
-    fetchGenres();
-  }, []);
+    user && user.isAdmin ? fetchGenres() : navigate("/");
+  }, [user, navigate]);
 
   const fetchGenres = () => {
     axios

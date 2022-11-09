@@ -29,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getUserCookie());
-  }, []);
+  }, [dispatch]);
 
   const user = useSelector((state) => state.user);
 
@@ -38,20 +38,20 @@ const App = () => {
       <Navbar user={user} />
       <Row className="justify-content-md-center min-height-view-port">
         {user.isAdmin ? (
-          <Col md={3} className="bg-color5 text-white p-3">
+          <Col md={2} className="bg-color5 text-white p-3">
             <AdminPanel />
           </Col>
         ) : (
           ""
         )}
-        <Col md={9}>
+        <Col md={10}>
           <Container fluid="md my-4">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/user" element={<User user={user} />} />
-              <Route path="/user/order/:id" element={<Order />} />
+              <Route path="/user/order/:id" element={<Order user={user} />} />
               <Route path="/book/:id" element={<Content />} />
               <Route path="/books/:type" element={<Grid />} />
               <Route path="/search/:query" element={<Grid />} />
@@ -61,10 +61,19 @@ const App = () => {
               <Route path="/admin/books" element={<AdminBooks />} />
               <Route path="/admin/books/edit/:id" element={<EditBook />} />
               <Route path="/admin/books/create" element={<EditBook />} />
-              <Route path="/admin/genres" element={<AdminGenres />} />
+              <Route
+                path="/admin/genres"
+                element={<AdminGenres user={user} />}
+              />
               <Route path="/admin/genres/edit/:id" element={<EditGenre />} />
-              <Route path="/admin/orders" element={<AdminOrders />} />
-              <Route path="/admin/orders/edit/:id" element={<Order />} />
+              <Route
+                path="/admin/orders"
+                element={<AdminOrders user={user} />}
+              />
+              <Route
+                path="/admin/orders/edit/:id"
+                element={<Order user={user} />}
+              />
               <Route path="/admin/users/createuser" element={<Signup />} />
             </Routes>
           </Container>

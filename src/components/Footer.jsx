@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer>
       <Container fluid className="bg-color4">
-        <Row className="bd-orange-700 text-white text-center">
+        <Row className="text-center text-white">
           <section className="fs-6">
             <a
               className="btn btn-link btn-floating btn-lg text-white m-1"
@@ -63,7 +63,7 @@ const Footer = () => {
             </a>
           </section>
         </Row>
-        <Row className="bd-orange-800 text-white text-center">
+        <Row className="text-white text-center">
           <section className="my-1">
             © 2022 Copyright:{" "}
             <a className="text-white" href="https://www.plataforma5.la/">
