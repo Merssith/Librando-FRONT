@@ -28,7 +28,8 @@ const Signup = () => {
 
   // si ya hay un usuario logueado redirige a home
   useEffect(() => {
-    if (user.id) navigate("/");
+    if (user.id && user.isAdmin === false) navigate("/");
+    else return;
   });
 
   const handleSubmit = (e) => {
@@ -61,8 +62,17 @@ const Signup = () => {
 
   return (
     <>
-      <h2 className="is-title is-size-2">Registrate</h2>
-      <p className="mb-4">Rellena el formulario para comenzar.</p>
+      {user.id && user.isAdmin === true ? (
+        <>
+          <h2>Hola {user.name},</h2> <p>puedes crear desde aqui!</p>
+        </>
+      ) : (
+        <div>
+          <h2 className="is-title is-size-2">Registrate</h2>
+          <p className="mb-4">Rellena el formulario para comenzar.</p>
+        </div>
+      )}
+
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
