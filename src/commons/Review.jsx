@@ -5,7 +5,7 @@ const Review = () => {
   return (
     //input para agregar review
     <>
-      <Form>
+      <Form className="mt-4">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>
             <h5>Dejar reseña</h5>

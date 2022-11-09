@@ -11,6 +11,8 @@ import {
   Button,
   Form,
   Offcanvas,
+  Row,
+  Col,
 } from "react-bootstrap";
 
 import useInput from "../hooks/useInput";
@@ -18,11 +20,11 @@ import { novelGenres } from "../utils";
 import logo from "../assets/logo_texto_marron.png";
 
 const NavBar = () => {
+  const { cart } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const query = useInput();
   const [show, setShow] = useState(false);
-
 
   // para abrir y cerrar el panel lateral del carrito
   const handleCanvasClose = () => setShow(false);
@@ -38,6 +40,13 @@ const NavBar = () => {
     e.preventDefault();
     navigate(`/search/${query.value}`);
   };
+
+  const handleClear = () => {
+    localStorage.removeItem("cart");
+    handleCanvasClose();
+  };
+
+  let totalBooks = 0;
 
   return (
     <Navbar bg="color3" expand="md" fixed="top" className="myNavbar">
@@ -66,11 +75,9 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="search-navbar-nav" />
         <Navbar.Collapse
           id="basic-navbar-nav"
-          className="justify-content-between"
-        >
+          className="justify-content-between">
           <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control
-            
               size="sm"
               type="search"
               placeholder="Search"
@@ -79,7 +86,11 @@ const NavBar = () => {
               {...query}
             />
             <Link to="/search">
-              <Button variant="outline-color5" size="sm" className="mt-2" type="submit">
+              <Button
+                variant="outline-color5"
+                size="sm"
+                className="mt-2"
+                type="submit">
                 Search
               </Button>
             </Link>
@@ -89,18 +100,52 @@ const NavBar = () => {
               variant="color5"
               size="sm"
               onClick={handleCanvasShow}
-              className="me-2 mt-2">
+              className="me-2 mt-2"
+              style={{ position: "relative" }}>
               🛒
+              <span
+                style={{ position: "absolute", top: "0px" }}
+                className="badge rounded-pill bg-danger">
+                {cart.length !== 0 ? cart.length : null}
+              </span>
+              &nbsp;
             </Button>
-            <Offcanvas show={show} onHide={handleCanvasClose} placement="end">
+            <Offcanvas
+              show={show}
+              onHide={handleCanvasClose}
+              placement="end"
+              className="bg-color2">
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Carrito</Offcanvas.Title>
+                <Offcanvas.Title>🛒 Carrito</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body className="justify-content-center">
                 <CartCanvas />
-                <Button onClick={handleCanvasSubmit} size="sm">
-                  Ir a pagar
-                </Button>
+                <br />
+                <Row fluid>
+                  {cart.length !== 0 ? (
+                    <>
+                      <Col sm={8}>
+                        <Button
+                          onClick={handleClear}
+                          size="sm"
+                          variant="color5"
+                          id="reload">
+                          Vaciar carrito
+                        </Button>
+                      </Col>
+                      <Col sm={4}>
+                        <Button
+                          onClick={handleCanvasSubmit}
+                          size="sm"
+                          variant="color5">
+                          Ir a pagar
+                        </Button>
+                      </Col>{" "}
+                    </>
+                  ) : (
+                    <div>¡Tu carrito está vacío!</div>
+                  )}
+                </Row>
               </Offcanvas.Body>
             </Offcanvas>
             {user.id ? (
@@ -109,8 +154,7 @@ const NavBar = () => {
                   size="sm"
                   variant="color5"
                   className="me-2 mt-2"
-                  onClick={() => navigate("/user")}
-                >
+                  onClick={() => navigate("/user")}>
                   <i className="bi bi-person-circle"> </i>
                   {user.name}
                 </Button>
@@ -118,27 +162,24 @@ const NavBar = () => {
                   variant="color5"
                   size="sm"
                   className="me-2 mt-2"
-                  onClick={() => navigate("/logout")}
-                >
+                  onClick={() => navigate("/logout")}>
                   Log out
                 </Button>
               </>
             ) : (
               <>
                 <Button
-                variant = "color5"
+                  variant="color5"
                   size="sm"
                   className="me-2 mt-2"
-                  onClick={() => navigate("/login")}
-                >
+                  onClick={() => navigate("/login")}>
                   Acceso
                 </Button>
                 <Button
                   variant="color5"
                   size="sm"
                   className="me-2 mt-2"
-                  onClick={() => navigate("/signup")}
-                >
+                  onClick={() => navigate("/signup")}>
                   Registro
                 </Button>
               </>

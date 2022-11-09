@@ -27,26 +27,26 @@ const Grid = () => {
       });
   }, []);
 
-  const max = libros.length/forPage
+  const max = libros.length / forPage;
 
   return (
     <div>
       <div className="paginacion">
-     <Pagination page={page} setPage={setPage} max={max} />
-     </div>
-      <br/>
+        <Pagination page={page} setPage={setPage} max={max} />
+      </div>
+      <br />
       <Container>
         <Row>
           {libros
-          .slice((page - 1) * forPage, (page - 1) * forPage + forPage)
-          .map((book, i) => (
-            <Col lg={3} md={4} sm={6} key={i}>
-              <CardBook book={book} />
-            </Col>
-          ))}
+            .slice((page - 1) * forPage, (page - 1) * forPage + forPage)
+            .map((book, i) => (
+              <Col lg={3} md={4} sm={6} key={i}>
+                <CardBook book={book} />
+              </Col>
+            ))}
         </Row>
       </Container>
-      <br/>
+      <br />
     </div>
   );
 };

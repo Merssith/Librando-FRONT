@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 const Footer = () => {
   return (
     <footer>
-      <Container fluid>
+      <Container fluid className="bg-color4">
         <Row className="bd-orange-700 text-white text-center">
           <section className="fs-6">
             <a

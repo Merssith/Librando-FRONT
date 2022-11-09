@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Signup from "./components/Signup";
-// import AdminPanel from "./components/AdminPanel";
+import AdminPanel from "./components/AdminPanel";
 import User from "./components/User";
 import Cart from "./components/Cart";
 import Order from "./components/Order";
