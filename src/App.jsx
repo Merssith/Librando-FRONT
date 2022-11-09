@@ -23,6 +23,7 @@ import EditGenre from "./commons/EditGenre";
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
 import EditBook from "./commons/EditBook";
+import EditUser from "./commons/EditUser";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const App = () => {
                 element={<Order user={user} />}
               />
               <Route path="/admin/users/createuser" element={<Signup />} />
+              <Route path="/admin/users/edit/:id" element={<EditUser />} />
             </Routes>
           </Container>
         </Col>

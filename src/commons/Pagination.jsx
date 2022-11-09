@@ -1,10 +1,8 @@
 import React from "react";
-import { useState } from "react";
 import { FaHandPointRight, FaHandPointLeft } from "react-icons/fa";
-import "../css/pagination.css"
+import "../css/pagination.css";
 
-const Pagination = ({ page, setPage, max }) => {
-  const [input, setInput] = useState(1);
+const Pagination = ({ page, setPage, max, input, setInput }) => {
 
   const nextPage = () => {
     setInput(input + 1);
@@ -41,7 +39,7 @@ const Pagination = ({ page, setPage, max }) => {
         <FaHandPointLeft />
       </button>
       <input
-      className="inputPag"
+        className="inputPag"
         onChange={onChange}
         onKeyDown={(e) => onKeyDown(e)}
         name="page"
