@@ -11,29 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-footer {
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-}
-
-.bd-orange-800 {
-  color: #fff;
-  background-color: #653208;
-}
-
-.bd-orange-700 {
-  color: #fff;
-  background-color: #984c0c;
-}
-
-.bd-orange-200 {
-  color: #000;
-  background-color: #fecba1;
-}
-
-.min-heigh-view-port {
-  min-height: 100vw;
-}
