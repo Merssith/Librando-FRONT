@@ -5,6 +5,7 @@ import { Container, Col, Row, Stack, Button } from "react-bootstrap";
 function Book({ book }) {
   const [quantity, setQuantity] = useState(0);
   const [items, setItems] = useState([]);
+  console.log(book);
 
   const handlePlus = () => {
     if (quantity < book.stock) setQuantity(quantity + 1);
@@ -46,7 +47,7 @@ function Book({ book }) {
                 <strong>Autor:</strong> {book.author}
               </p>
               <p>
-                <strong>Genero:</strong> {book.genre}
+                <strong> Genero:</strong> {book.genre ? book.genre.name : ""} 
               </p>
               <p>
                 <strong>Descripción:</strong> {book.description}

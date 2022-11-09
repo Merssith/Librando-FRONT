@@ -1,17 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Form, FloatingLabel, InputGroup } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 const EditBook = () => {
   const { id } = useParams();
   const [libro, setLibro] = useState({});
   const navigate = useNavigate();
+  // const location = useLocation ()
+  ;
 
   //traigo todos los libros para editarlos
   useEffect(() => {
     getBookById();
+    // setLibro (location.state)
+    
+
   }, []);
+  console.log(libro)
 
   const getBookById = () => {
     axios.get(`http://localhost:3001/api/books/${id}`).then((res) => {
@@ -38,8 +44,8 @@ const EditBook = () => {
           stock: e.target[6].value,
           price: e.target[7].value,
         })
-        .then(() => {
-          alert(`LIBRO EDITADO!: ${libro.title} ✅`);
+        .then((res) => {
+          alert(`LIBRO EDITADO!: ${res.data.title} ✅`);
         })
         .then(() => {
           navigate(`/book/${id}`);
@@ -89,7 +95,7 @@ const EditBook = () => {
         </InputGroup>
         <InputGroup className="mb-3">
           <InputGroup.Text>Genero</InputGroup.Text>
-          <Form.Control defaultValue={libro.genre} />
+          <Form.Control  defaultValue={libro.genre ? libro.genre.name : ""} />
         </InputGroup>
         <InputGroup className="mb-3">
           <InputGroup.Text>Descripcion</InputGroup.Text>
