@@ -14,11 +14,13 @@ import AdminPanel from "./components/AdminPanel";
 import User from "./components/User";
 import Cart from "./components/Cart";
 import Order from "./components/Order";
+import AdminPanel from "./components/AdminPanel"
 import AdminUsers from "./components/AdminUsers";
 import AdminBooks from "./components/AdminBooks";
 import AdminGenres from "./components/AdminGenres";
 import AdminOrders from "./components/AdminOrders";
 import EditGenre from "./commons/EditGenre";
+
 
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
@@ -33,6 +35,8 @@ const App = () => {
 
   const user = useSelector((state) => state.user);
 
+  
+
   return (
     <div className="app">
       <Navbar user={user} />
@@ -43,7 +47,7 @@ const App = () => {
           </Col>
         ) : (
           ""
-        )}
+        )} 
         <Col md={9}>
           <Container fluid="md my-4">
             <Routes>

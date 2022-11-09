@@ -13,6 +13,7 @@ const Content = () => {
       .get(`http://localhost:3001/api/books/${id}`)
       .then((res) => res.data)
       .then((book) => {
+        console.log(book)
         setLibro(book);
       });
   }, [id]);
@@ -20,7 +21,7 @@ const Content = () => {
   return (
     <div>
       <Book book={libro} />
-      <Review />
+     <Review /> 
     </div>
   );
 };
