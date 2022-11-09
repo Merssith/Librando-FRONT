@@ -4,8 +4,7 @@ import { Table } from "react-bootstrap";
 
 const ListOrders = ({ orders }) => {
   return (
-    <>
-      {" "}
+    <div className="table-responsive">
       <h6>
         <strong>Historial de Ordenes</strong>
       </h6>
@@ -31,7 +30,9 @@ const ListOrders = ({ orders }) => {
                   <td>{order.user.name}</td>
                   <td>{order.user.lastname}</td>
                   <td>{order.status.name}</td>
-                  <td html={order.payment.logo}></td>
+                  <td>
+                    <img src={order.payment.logo} alt="tipo pago"></img>
+                  </td>
                   <td>{new Date(order.createdAt).toDateString()}</td>
                   <td>{order.total}</td>
                   <td className="text-center">
@@ -47,7 +48,7 @@ const ListOrders = ({ orders }) => {
           )}
         </tbody>
       </Table>
-    </>
+    </div>
   );
 };
 

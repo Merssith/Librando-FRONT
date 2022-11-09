@@ -38,7 +38,10 @@ const App = () => {
       <Navbar user={user} />
       <Row className="justify-content-md-center min-height-view-port">
         {user.isAdmin ? (
-          <Col md={2} className="bg-color5 text-white p-3">
+          <Col
+            md={2}
+            className="bg-color5 text-white justify-content-md-center p-3"
+          >
             <AdminPanel />
           </Col>
         ) : (
