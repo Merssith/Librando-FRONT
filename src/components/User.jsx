@@ -7,7 +7,7 @@ import ListOrders from "../commons/ListOrders";
 const User = ({ user }) => {
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
-  console.log(orders);
+
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/order/userOrders/${user.id}`)
