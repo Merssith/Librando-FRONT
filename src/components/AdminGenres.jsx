@@ -71,7 +71,7 @@ const AdminGenres = () => {
                   <td>{genre.id}</td>
                   <td>{genre.name}</td>
                   <td className="text-center">
-                    <Link to={`/admin/genres/${genre.id}`} state={genre}>
+                    <Link to={`/admin/genres/edit/${genre.id}`} state={genre}>
                       <i className="bi bi-pencil text-primary"></i>
                     </Link>
                   </td>
