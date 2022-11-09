@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLoginRequest } from "../state/user";
 import axios from "axios";
 
 import useInput from "../hooks/useInput";
-import { joinAddress } from "../utils";
 
 import { Button, Col, Row, Form } from "react-bootstrap";
 
 const Signup = () => {
   const user = useSelector((state) => state.user);
   const [validated, setValidated] = useState(false);
-  const [address, setAddress] = useState("");
   const name = useInput();
   const lastname = useInput();
   const dni = useInput();
@@ -28,7 +26,10 @@ const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(admin);
+  // si ya hay un usuario logueado redirige a home
+  useEffect(() => {
+    if (user.id) navigate("/");
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,16 +37,7 @@ const Signup = () => {
     if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
-      setAddress(
-        joinAddress([
-          dir.value,
-          num.value,
-          dpto.value,
-          city.value,
-          state.value,
-          cpa.value,
-        ])
-      );
+      const address = `${dir.value},${num.value},${dpto.value},${city.value},${state.value},${cpa.value}`;
       axios
         .post("http://localhost:3001/api/users/register", {
           name: name.value,
@@ -94,7 +86,7 @@ const Signup = () => {
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustom03">
             <Form.Label>DNI</Form.Label>
-            <Form.Control required type="text" placeholder="Nombre" {...dni} />
+            <Form.Control required type="text" placeholder="DNI" {...dni} />
             <Form.Control.Feedback type="invalid">
               Por favor introduce un DNI.
             </Form.Control.Feedback>

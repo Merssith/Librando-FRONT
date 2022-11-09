@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 import CartCanvas from "./CartCanvas";
 import {
@@ -14,15 +15,22 @@ import {
 } from "react-bootstrap";
 
 import useInput from "../hooks/useInput";
-import { novelGenres } from "../utils";
 import logo from "../assets/logo_texto_marron.png";
+import { useEffect } from "react";
 
-const NavBar = () => {
-  const user = useSelector((state) => state.user);
+const NavBar = ({ user }) => {
+  /* const user = useSelector((state) => state.user); */
   const navigate = useNavigate();
   const query = useInput();
   const [show, setShow] = useState(false);
+  const [genres, setGenres] = useState([]);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/genres")
+      .then((res) => res.data)
+      .then((genres) => setGenres(genres));
+  }, []);
 
   // para abrir y cerrar el panel lateral del carrito
   const handleCanvasClose = () => setShow(false);
@@ -52,11 +60,13 @@ const NavBar = () => {
           />
         </Navbar.Brand>
         <NavDropdown title="Géneros" id="basic-nav-dropdown" className="me-4">
-          {novelGenres.map((genre, i) => (
-            <NavDropdown.Item key={i} as={Link} to={`/books/${genre}`}>
-              {genre}
-            </NavDropdown.Item>
-          ))}
+          {genres.length
+            ? genres.map((genre, i) => (
+                <NavDropdown.Item key={i} as={Link} to={`/books/${genre.name}`}>
+                  {genre.name}
+                </NavDropdown.Item>
+              ))
+            : ""}
           <NavDropdown.Divider />
           <NavDropdown.Item as={Link} to={"/books/all"}>
             Todos
@@ -70,7 +80,6 @@ const NavBar = () => {
         >
           <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control
-            
               size="sm"
               type="search"
               placeholder="Search"
@@ -78,19 +87,23 @@ const NavBar = () => {
               aria-label="Search"
               {...query}
             />
-            <Link to="/search">
-              <Button variant="outline-color5" size="sm" className="mt-2" type="submit">
-                Search
-              </Button>
-            </Link>
+            <Button
+              variant="outline-color5"
+              size="sm"
+              className="mt-2"
+              type="submit"
+            >
+              Search
+            </Button>
           </Form>
           <Nav>
             <Button
               variant="color5"
               size="sm"
               onClick={handleCanvasShow}
-              className="me-2 mt-2">
-              🛒
+              className="me-2 mt-2"
+            >
+              <i className="bi bi-cart3"></i>
             </Button>
             <Offcanvas show={show} onHide={handleCanvasClose} placement="end">
               <Offcanvas.Header closeButton>
@@ -126,7 +139,7 @@ const NavBar = () => {
             ) : (
               <>
                 <Button
-                variant = "color5"
+                  variant="color5"
                   size="sm"
                   className="me-2 mt-2"
                   onClick={() => navigate("/login")}

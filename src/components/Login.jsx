@@ -27,6 +27,13 @@ const Login = () => {
     ).then(() => navigate("/"));
   };
 
+  const handleClick = () => {
+    // seteamos el user en redux y redirigimos al home si todo va bien
+    dispatch(
+      sendLoginRequest({ email: "admin@admin.com", password: "1234" })
+    ).then(() => navigate("/"));
+  };
+
   return (
     <>
       <h2 className="mb-4">Ingresa a tu cuenta</h2>
@@ -52,13 +59,13 @@ const Login = () => {
             />
           </FloatingLabel>
         </Form.Group>
-        <div class="logginButtons">
-        <Button variant="color5" type="submit">
-          Log In
-        </Button>{" "}
-        <Button variant="color3" type="submit">
-          Admin
-        </Button>
+        <div className="logginButtons">
+          <Button variant="color5" type="submit">
+            Log In
+          </Button>
+          <Button variant="color3" onClick={handleClick}>
+            Admin
+          </Button>
         </div>
       </Form>
     </>

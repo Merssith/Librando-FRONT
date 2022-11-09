@@ -1,7 +1,9 @@
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 
-body { padding-top: 80px; }
+body {
+  padding-top: 80px;
+}
 
 $custom-colors: (
   "color1": #ffd8b8,
@@ -63,11 +65,11 @@ footer {
 
 .logginButtons {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
-.myNavbar{
-  background-image: var(--bs-gradient)
+.myNavbar {
+  background-image: var(--bs-gradient);
 }
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
