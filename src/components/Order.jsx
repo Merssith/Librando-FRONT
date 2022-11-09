@@ -1,10 +1,13 @@
 import React from "react";
+import { useLocation } from "react-router";
 
 const Order = () => {
+  const order = useLocation().state;
+  console.log(order);
   return (
     <div>
       <h5>Detalle de orden</h5>
-      <p>Admin puede modificar status: pendiente, confirmada, rechazada</p>
+      <p>Nombre: {order.user.name}</p>
     </div>
   );
 };

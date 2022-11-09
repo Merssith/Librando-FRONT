@@ -1,78 +1,80 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { sendLoginRequest } from "../state/user";
+/* import React from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Button, Form, Row, Col, FloatingLabel, InputGroup } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router";
 
-import useInput from "../hooks/useInput";
-
-import { Button, Col, Row, Form } from "react-bootstrap";
-
-const Signup = () => {
-  const user = useSelector((state) => state.user);
-  const [validated, setValidated] = useState(false);
-  const name = useInput();
-  const lastname = useInput();
-  const dni = useInput();
-  const email = useInput();
-  const password = useInput();
-  const dir = useInput();
-  const num = useInput();
-  const dpto = useInput();
-  const city = useInput();
-  const state = useInput();
-  const cpa = useInput();
-  const [admin, setAdmin] = useState(false);
+const EditUser = () => {
+  const { id } = useParams();
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  // si ya hay un usuario logueado redirige a home
+  //traigo todos los libros para editarlos
   useEffect(() => {
-    if (user.id) navigate("/");
-  });
+    getUserById();
+  }, []);
 
+  const getUserById = () => {
+    axios.get(`http://localhost:3001/api/users/${id}`)
+    .then((res) => res.data)
+    .then((user) => {
+        console.log(user)
+        setUser(user)
+    })
+  };
+
+  //edita el libro ya existente
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.stopPropagation();
-    } else {
-      const address = `${dir.value},${num.value},${dpto.value},${city.value},${state.value},${cpa.value}`;
+
+    //edito libro ya existente
+    if (id) {
+      // console.log(e.target[0].value);
+
       axios
-        .post("http://localhost:3001/api/users/register", {
-          name: name.value,
-          lastname: lastname.value,
-          email: email.value,
-          password: password.value,
-          dni: dni.value,
-          address,
-          isAdmin: admin,
+        .put(`http://localhost:3001/api/users/change/${id}`, {
+          title: e.target[0].value,
+          author: e.target[1].value,
+          genre: e.target[2].value,
+          description: e.target[3].value,
+          editorial: e.target[4].value,
+          front: e.target[5].value,
+          stock: e.target[6].value,
+          price: e.target[7].value,
         })
-        .then((res) => res.data)
-        .then(({ email }) => {
-          // tras el registro hacemos login automatico y redirigimos a home
-          dispatch(sendLoginRequest({ email, password: password.value }));
-          navigate("/");
+        .then(() => {
+          alert(`Modificado!: ${user.name} ✅`);
         })
-        .catch((error) => console.log(error));
+        .then(() => {
+          navigate(`/user/${id}`);
+        });
     }
-    setValidated(true);
-  };
+
+    //creo libro
+   
+    
+  }
 
   return (
     <>
-      <h2 className="is-title is-size-2">Registrate</h2>
-      <p className="mb-4">Rellena el formulario para comenzar.</p>
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      
+      {id ? (
+        <h2 className="mb-5">
+          Editar <i class="bi bi-pencil"></i>
+        </h2>
+      ) : (
+        ""
+      )}
+          <Form  onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
             <Form.Label>Nombre</Form.Label>
-            <Form.Control required type="text" placeholder="Nombre" {...name} />
+            <Form.Control required type="text" placeholder="Nombre"  />
             <Form.Control.Feedback type="invalid">
               Por favor introduce un nombre.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom02">
+          <Form.Group as={Col} md="4" controlId="validationCustom02" >
             <Form.Label>Apellido</Form.Label>
             <Form.Control
               required
@@ -86,7 +88,7 @@ const Signup = () => {
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustom03">
             <Form.Label>DNI</Form.Label>
-            <Form.Control required type="text" placeholder="DNI" {...dni} />
+            <Form.Control required type="text" placeholder="Nombre" {...dni} />
             <Form.Control.Feedback type="invalid">
               Por favor introduce un DNI.
             </Form.Control.Feedback>
@@ -197,4 +199,5 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default EditUser;
+ */

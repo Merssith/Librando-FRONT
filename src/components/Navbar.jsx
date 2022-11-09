@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 import CartCanvas from "./CartCanvas";
 import {
@@ -16,15 +17,23 @@ import {
 } from "react-bootstrap";
 
 import useInput from "../hooks/useInput";
-import { novelGenres } from "../utils";
 import logo from "../assets/logo_texto_marron.png";
+import { useEffect } from "react";
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   const { cart } = useSelector((state) => state.cart);
-  const user = useSelector((state) => state.user);
+  /* const user = useSelector((state) => state.user); */
   const navigate = useNavigate();
   const query = useInput();
   const [show, setShow] = useState(false);
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/genres")
+      .then((res) => res.data)
+      .then((genres) => setGenres(genres));
+  }, []);
 
   // para abrir y cerrar el panel lateral del carrito
   const handleCanvasClose = () => setShow(false);
@@ -61,11 +70,13 @@ const NavBar = () => {
           />
         </Navbar.Brand>
         <NavDropdown title="Géneros" id="basic-nav-dropdown" className="me-4">
-          {novelGenres.map((genre, i) => (
-            <NavDropdown.Item key={i} as={Link} to={`/books/${genre}`}>
-              {genre}
-            </NavDropdown.Item>
-          ))}
+          {genres.length
+            ? genres.map((genre, i) => (
+                <NavDropdown.Item key={i} as={Link} to={`/books/${genre.name}`}>
+                  {genre.name}
+                </NavDropdown.Item>
+              ))
+            : ""}
           <NavDropdown.Divider />
           <NavDropdown.Item as={Link} to={"/books/all"}>
             Todos
@@ -85,15 +96,16 @@ const NavBar = () => {
               aria-label="Search"
               {...query}
             />
-            <Link to="/search">
-              <Button
-                variant="outline-color5"
-                size="sm"
-                className="mt-2"
-                type="submit">
-                Search
-              </Button>
-            </Link>
+
+            <Button
+              variant="outline-color5"
+              size="sm"
+              className="mt-2"
+              type="submit"
+            >
+              Search
+            </Button>
+
           </Form>
           <Nav>
             <Button
@@ -102,13 +114,15 @@ const NavBar = () => {
               onClick={handleCanvasShow}
               className="me-2 mt-2"
               style={{ position: "relative" }}>
-              🛒
+              <i className="bi bi-cart3"></i>
               <span
                 style={{ position: "absolute", top: "0px" }}
                 className="badge rounded-pill bg-danger">
                 {cart.length !== 0 ? cart.length : null}
               </span>
               &nbsp;
+            >
+
             </Button>
             <Offcanvas
               show={show}

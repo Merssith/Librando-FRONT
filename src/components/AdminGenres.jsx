@@ -7,56 +7,53 @@ import { InputGroup, Form, Button, Table } from "react-bootstrap";
 import useInput from "../hooks/useInput";
 
 const AdminGenres = () => {
-  //const [genres, setGenres] = useState([]);
-  const [edit, setEdit] = useState(0);
+  const [genres, setGenres] = useState([]);
   const newGenre = useInput();
-  const updateGenre = useInput();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
     if (!user.isAdmin) navigate("/");
     fetchGenres();
-  });
+  }, []);
 
   const fetchGenres = () => {
-    /* axios
-      .get("http://localhost:3001/api/genre")
-      .then((genres) => setOrders(genre)); */
+    axios
+      .get("http://localhost:3001/api/genres")
+      .then((res) => res.data)
+      .then((genres) => setGenres(genres));
   };
 
   const addGenre = () => {
-    alert("Añadir " + newGenre.value);
-    /* axios
-      .create(`http://localhost:3001/api/genre/`, newGenre.value)
-      .then(() => fetchGenres()); */
+    newGenre.value !== ""
+      ? axios
+          .post(`http://localhost:3001/api/genres/create`, {
+            name: newGenre.value,
+          })
+          .then(() => fetchGenres())
+      : alert("Ingresa un género");
   };
 
-  const editGenre = (id) => {
-    alert("Modificar " + id);
-    /* axios
-      .put(`http://localhost:3001/api/genre/${id}`, updateGenre.value)
-      .then(() => fetchGenres()); */
-    setEdit(0);
-  };
   const deleteGenre = (id) => {
-    alert("Eliminar " + id);
-    /* axios
-      .delete(`http://localhost:3001/api/genre/${id}`, genre.value)
-      .then(() => fetchGenres()); */
+    axios
+      .get(`http://localhost:3001/api/genres/list/${id}`)
+      .then((res) => res.data)
+      .then((booksByGenre) =>
+        booksByGenre.length
+          ? alert(
+              "No puede eliminar. Hay productos pertencientes a este género"
+            )
+          : axios
+              .delete(`http://localhost:3001/api/genres/delete/${id}`)
+              .then(() => fetchGenres())
+      );
   };
-
-  const genres = [
-    { id: 1, name: "Aventura" },
-    { id: 2, name: "Cuentos de Hadas" },
-    { id: 3, name: "Gótica" },
-    { id: 4, name: "Policiaca" },
-    { id: 5, name: "Romance Paranormal" },
-  ];
 
   return (
     <>
-      <h5>Listado de Géneros</h5>
+      <h5>
+        <strong>Listado de Géneros</strong>
+      </h5>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -74,11 +71,9 @@ const AdminGenres = () => {
                   <td>{genre.id}</td>
                   <td>{genre.name}</td>
                   <td className="text-center">
-                    <i
-                      className="bi bi-pencil text-primary"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => setEdit(genre.id)}
-                    ></i>
+                    <Link to={`/admin/genres/${genre.id}`} state={genre}>
+                      <i className="bi bi-pencil text-primary"></i>
+                    </Link>
                   </td>
                   <td className="text-center">
                     <i
@@ -95,31 +90,15 @@ const AdminGenres = () => {
           )}
         </tbody>
       </Table>
-      <Form className="mb-3">
-        <Form.Control
-          required
-          placeholder="Genero"
-          aria-label="Recipient's username"
-          {...newGenre}
-        />
+      <InputGroup className="mb-3">
+        <Form.Control required type="text" placeholder="Genero" {...newGenre} />
+        <Form.Control.Feedback type="invalid">
+          Por favor ingresa un género.
+        </Form.Control.Feedback>
         <Button variant="primary" type="submit" onClick={addGenre}>
           <i className="bi bi-bookmark-plus"> Añadir</i>
         </Button>
-      </Form>
-      {edit ? (
-        <InputGroup className="mb-3">
-          <Form.Control
-            placeholder="Genero"
-            aria-label="Recipient's username"
-            {...updateGenre}
-          />
-          <Button variant="primary" onClick={() => editGenre(edit)}>
-            <i className="bi bi-bookmark-plus"> Modificar</i>
-          </Button>
-        </InputGroup>
-      ) : (
-        ""
-      )}
+      </InputGroup>
     </>
   );
 };

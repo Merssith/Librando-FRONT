@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../state/actions/cartActions";
 import cartReducer from "../state/reducers/cartReducers";
 
-function Book({ book }) {
+function Book ({ book }) {
   const [quantity, setQuantity] = useState(0);
+
   const dispatch = useDispatch();
+
 
   const handlePlus = () => {
     if (quantity < book.stock) setQuantity(quantity + 1);
@@ -47,7 +49,10 @@ function Book({ book }) {
                 <strong>Autor:</strong> {book.author}
               </p>
               <p>
-                <strong>Genero:</strong> {book.genre}
+
+
+                <strong> Genero:</strong> {book.genre ? book.genre.name : ""} 
+
               </p>
               <p>
                 <strong>Descripción:</strong> {book.description}
