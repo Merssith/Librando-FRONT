@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Signup from "./components/Signup";
-// import AdminPanel from "./components/AdminPanel";
+import AdminPanel from "./components/AdminPanel";
 import User from "./components/User";
 import Cart from "./components/Cart";
 import Order from "./components/Order";
@@ -24,7 +24,6 @@ import AdminOrders from "./components/AdminOrders";
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
 import EditBook from "./commons/EditBook";
-
 
 
 const App = () => {
@@ -48,7 +47,11 @@ const App = () => {
           </Col>
         ) : (
           ""
+
         )} 
+
+        
+
         <Col md={9}>
           <Container fluid="md my-4">
             <Routes>
@@ -68,7 +71,7 @@ const App = () => {
               <Route path="/admin/genres" element={<AdminGenres />} />
               <Route path="/admin/orders" element={<AdminOrders />} />
               <Route path="/admin/orders/:id" element={<Order />} />
-              <Route path="/admin/users/createuser" element={<Signup/>} />
+              <Route path="/admin/users/createuser" element={<Signup />} />
             </Routes>
           </Container>
         </Col>
@@ -79,4 +82,3 @@ const App = () => {
 };
 
 export default App;
-
