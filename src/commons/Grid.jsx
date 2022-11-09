@@ -10,43 +10,49 @@ import { useParams } from "react-router";
 import axios from "axios";
 
 const Grid = () => {
-  const { type } = useParams();
-  console.log(type);
+  const { type, query } = useParams();
 
   const [libros, setLibros] = useState([]);
   const [page, setPage] = useState(1);
   const [forPage, setForPage] = useState(12);
 
+  let ruta;
+
+  if (type) ruta = `genres/list/${type}`;
+  if (query) ruta = `books/search/${query}`;
+
+  console.log(ruta);
+
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/api/books/`)
+      .get(`http://localhost:3001/api/${ruta}`)
       .then((res) => res.data)
       .then((books) => {
         console.log(books);
         setLibros(books);
       });
-  }, []);
+  }, [type, query]);
 
-  const max = libros.length/forPage
+  const max = libros.length / forPage;
 
   return (
     <div>
       <div className="paginacion">
-     <Pagination page={page} setPage={setPage} max={max} />
-     </div>
-      <br/>
+        <Pagination page={page} setPage={setPage} max={max} />
+      </div>
+      <br />
       <Container>
         <Row>
           {libros
-          .slice((page - 1) * forPage, (page - 1) * forPage + forPage)
-          .map((book, i) => (
-            <Col lg={3} md={4} sm={6} key={i}>
-              <CardBook book={book} />
-            </Col>
-          ))}
+            .slice((page - 1) * forPage, (page - 1) * forPage + forPage)
+            .map((book, i) => (
+              <Col lg={3} md={4} sm={6} key={i}>
+                <CardBook book={book} />
+              </Col>
+            ))}
         </Row>
       </Container>
-      <br/>
+      <br />
     </div>
   );
 };

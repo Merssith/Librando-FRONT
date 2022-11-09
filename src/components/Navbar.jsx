@@ -23,7 +23,6 @@ const NavBar = () => {
   const query = useInput();
   const [show, setShow] = useState(false);
 
-
   // para abrir y cerrar el panel lateral del carrito
   const handleCanvasClose = () => setShow(false);
   const handleCanvasShow = () => setShow(true);
@@ -70,7 +69,6 @@ const NavBar = () => {
         >
           <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control
-            
               size="sm"
               type="search"
               placeholder="Search"
@@ -78,18 +76,23 @@ const NavBar = () => {
               aria-label="Search"
               {...query}
             />
-            <Link to="/search">
-              <Button variant="outline-color5" size="sm" className="mt-2" type="submit">
-                Search
-              </Button>
-            </Link>
+
+            <Button
+              variant="outline-color5"
+              size="sm"
+              className="mt-2"
+              type="submit"
+            >
+              Search
+            </Button>
           </Form>
           <Nav>
             <Button
               variant="color5"
               size="sm"
               onClick={handleCanvasShow}
-              className="me-2 mt-2">
+              className="me-2 mt-2"
+            >
               🛒
             </Button>
             <Offcanvas show={show} onHide={handleCanvasClose} placement="end">
@@ -126,7 +129,7 @@ const NavBar = () => {
             ) : (
               <>
                 <Button
-                variant = "color5"
+                  variant="color5"
                   size="sm"
                   className="me-2 mt-2"
                   onClick={() => navigate("/login")}
