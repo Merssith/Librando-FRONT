@@ -14,14 +14,17 @@ import Signup from "./components/Signup";
 import User from "./components/User";
 import Cart from "./components/Cart";
 import Order from "./components/Order";
+import AdminPanel from "./components/AdminPanel"
 import AdminUsers from "./components/AdminUsers";
 import AdminBooks from "./components/AdminBooks";
 import AdminGenres from "./components/AdminGenres";
 import AdminOrders from "./components/AdminOrders";
 
+
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
 import EditBook from "./commons/EditBook";
+
 
 
 const App = () => {
@@ -32,6 +35,8 @@ const App = () => {
   }, [dispatch]);
 
   const user = useSelector((state) => state.user);
+
+  
 
   return (
     <div className="app">
@@ -44,7 +49,7 @@ const App = () => {
         ) : (
           ""
         )} 
-        <Col md={12}>
+        <Col md={9}>
           <Container fluid="md my-4">
             <Routes>
               <Route path="/" element={<Home />} />

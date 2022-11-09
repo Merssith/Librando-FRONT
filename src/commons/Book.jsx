@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Container, Col, Row, Stack, Button } from "react-bootstrap";
 
-function Book({ book }) {
+function Book ({ book }) {
   const [quantity, setQuantity] = useState(0);
   const [items, setItems] = useState([]);
 
@@ -23,9 +23,9 @@ function Book({ book }) {
     console.log(items)
   };
 
-  useEffect(() => {
+ useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
-  }, [items]);
+  }, [items]); 
 
   return (
     <div>
@@ -46,7 +46,7 @@ function Book({ book }) {
                 <strong>Autor:</strong> {book.author}
               </p>
               <p>
-                <strong>Genero:</strong> {book.genre}
+                <strong>Genero:</strong> {book.genre ? book.genre.name : ""}
               </p>
               <p>
                 <strong>Descripción:</strong> {book.description}

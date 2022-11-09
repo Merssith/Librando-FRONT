@@ -14,12 +14,12 @@ import axios from "axios";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
-/*   const [name, setName] = useState("")
-  const [lastname, setlastname] = useState("")
-  const [email, setEmail] = useState("")
-  const [isAdmin, setIsAdmin] = useState(false) */
 
   useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = () => {
     axios
       .get("http://localhost:3001/api/users")
       .then((res) => res.data)
@@ -27,38 +27,20 @@ const AdminUsers = () => {
         console.log("users", usr);
         setUsers(usr);
       });
-  }, []);
+  };
 
+  const deleteUser = (id) => {
+    axios
+      .delete(`http://localhost:3001/api/users/delete/${id}`)
+      .then(() => {
+        alert("ELIMINADO!");
+      })
+      .then(() => {
+        getUsers();
+      });
+  };
 
-/*   const handleName = (e) => {
-    e.preventDefault()
-    setName(e.target.value)
-  }
-
-  const handleLast = (e) => {
-    e.preventDefault()
-    setlastname(e.target.value)
-  }
-
-  const handleEmail = (e) => {
-    e.preventDefault()
-    setEmail(e.target.value)
-  }
-
-  const handleAdmin = (e) => {
-    e.preventDefault()
-    setIsAdmin(e.target.value)
-  }
-
-
-  const handlePut = () => {
-    const {name, lastname, email, isAdmin} = user
-    console.log(user)
-    axios.put("http://localhost:3001/api/users/:id", user)
-    .then((res) => res.data)
-    .then((us) => console.log(us))
-  }
- */
+  
 
   return (
     <div>
@@ -68,46 +50,52 @@ const AdminUsers = () => {
           <FcAndroidOs />
         </button>
       </Link>
-      <br />
-      <br />
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>E-mail</th>
-            <th>lastname</th>
-            <th>isAdmin</th>
-            <th className="text-center">Editar</th>
-            <th className="text-center">Eliminar</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.length ? (
-            users.map((user, i) => {
-              return (
-                
-                <tr key={i}>
-                  
-                  <td  >{user.id}</td>
-                  <td /* onClick={handleName} */ >{user.name}</td>
-                  <td /* onClick={handleEmail} */ >{user.email}</td>
-                  <td /* onClick={handleLast}  */>{user.lastname}</td>
-                  <td /* onClick={handleAdmin}  */className="text-center" >
+
+      <div style={{ padding: "5%" }}>
+        <div>
+          <Table striped bordered hover variant="dark">
+            <thead>
+              <tr style={{ textAlign: "center" }}>
+                <th>Id</th>
+                <th>name</th>
+                <th>lastname</th>
+                <th>e-mail</th>
+                <th>isAdmin</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, i) => (
+                <tr
+                  key={i}
+                  style={{ textAlign: "center", verticalAlign: "middle" }}
+                >
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.lastname}</td>
+                  <td>${user.email}</td>
+                  <td>
                     {user.isAdmin === true ? <FcFlashAuto /> : <FcFlashOff />}
                   </td>
-                  
-
-                  <td /* onClick={handlePut}  */className="text-center">{<FcEditImage />}</td>
-                  <td className="text-center">{<FcEmptyTrash />}</td>
+                  <td>
+                    <Link to={`/admin/users/edit/${user.id}`}>
+                      <FcEditImage />
+                    </Link>
+                  </td>
+                  <td style={{ textAlign: "center" }}>
+                    <FcEmptyTrash
+                      onClick={() => {
+                        deleteUser(user.id);
+                      }}
+                    />
+                  </td>
                 </tr>
-              );
-            })
-          ) : (
-            <></>
-          )}
-        </tbody>
-      </Table>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </div>
     </div>
   );
 };
