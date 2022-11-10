@@ -4,7 +4,6 @@ import Grid from "./commons/Grid";
 import Home from "./components/Home";
 import Content from "./components/Content.jsx";
 import { useDispatch, useSelector } from "react-redux";
-
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
@@ -13,19 +12,16 @@ import Signup from "./components/Signup";
 import User from "./components/User";
 import Cart from "./components/Cart";
 import Order from "./components/Order";
-
+import AdminPanel from "./components/AdminPanel";
 import AdminUsers from "./components/AdminUsers";
 import AdminBooks from "./components/AdminBooks";
 import AdminGenres from "./components/AdminGenres";
 import AdminOrders from "./components/AdminOrders";
 import EditGenre from "./commons/EditGenre";
-
-
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
 import EditBook from "./commons/EditBook";
 import EditUser from "./commons/EditUser";
-import AdminPanel from "./components/AdminPanel";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,15 +38,15 @@ const App = () => {
       <Row className="justify-content-md-center min-height-view-port">
         {user.isAdmin ? (
           <Col
-            md={2}
+            md={3}
             className="bg-color5 text-white justify-content-md-center p-3"
           >
             <AdminPanel />
           </Col>
         ) : (
           ""
-        )}
-        <Col md={10}>
+        )} 
+        <Col md={9}>
           <Container fluid="md my-4">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -62,7 +58,7 @@ const App = () => {
               <Route path="/books/:type" element={<Grid />} />
               <Route path="/search/:query" element={<Grid />} />
               <Route path="/logout" element={<Logout />} />
-              <Route path="/checkout" element={<Cart />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="/admin/users" element={<AdminUsers />} />
               <Route path="/admin/books" element={<AdminBooks />} />
               <Route path="/admin/books/edit/:id" element={<EditBook />} />

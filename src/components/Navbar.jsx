@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
 import CartCanvas from "./CartCanvas";
+import { clearCart } from "../state/actions/cartActions";
+import { useDispatch } from "react-redux";
 import {
   Container,
   Navbar,
@@ -15,18 +16,17 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-
 import useInput from "../hooks/useInput";
 import logo from "../assets/logo_texto_marron.png";
 import { useEffect } from "react";
 
 const NavBar = ({ user }) => {
   const { cart } = useSelector((state) => state.cart);
-
   const navigate = useNavigate();
   const query = useInput();
   const [show, setShow] = useState(false);
   const [genres, setGenres] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -42,7 +42,7 @@ const NavBar = ({ user }) => {
   // funcionalidad botono "ir a pagar": cierra panel lateral y redirige
   const handleCanvasSubmit = () => {
     handleCanvasClose();
-    navigate("/checkout");
+    navigate("/cart");
   };
 
   const handleSearch = (e) => {
@@ -50,8 +50,8 @@ const NavBar = ({ user }) => {
     navigate(`/search/${query.value}`);
   };
 
-  const handleClear = () => {
-    localStorage.removeItem("cart");
+  const handleClearCart = () => {
+    dispatch(clearCart());
     handleCanvasClose();
   };
 
@@ -102,8 +102,7 @@ const NavBar = ({ user }) => {
               variant="outline-color5"
               size="sm"
               className="mt-2"
-              type="submit"
-            >
+              type="submit">
               Search
             </Button>
           </Form>
@@ -131,33 +130,34 @@ const NavBar = ({ user }) => {
               className="bg-color2"
             >
               <Offcanvas.Header closeButton>
-                <Offcanvas.Title>🛒 Carrito</Offcanvas.Title>
+                <Offcanvas.Title>
+                  <i className="bi bi-cart3"></i> Carrito
+                </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body className="justify-content-center">
                 <CartCanvas />
                 <br />
-                <Row fluid>
+                <Row >
                   {cart.length !== 0 ? (
                     <>
-                      <Col sm={8}>
+                      <Col sm={9}>
                         <Button
-                          onClick={handleClear}
+                          onClick={handleClearCart}
                           size="sm"
                           variant="color5"
                           id="reload"
-                        >
+                          >
                           Vaciar carrito
                         </Button>
                       </Col>
-                      <Col sm={4}>
+                      <Col sm={3}>
                         <Button
                           onClick={handleCanvasSubmit}
                           size="sm"
-                          variant="color5"
-                        >
-                          Ir a pagar
+                          variant="color5">
+                          Comprar
                         </Button>
-                      </Col>{" "}
+                      </Col>
                     </>
                   ) : (
                     <div>¡Tu carrito está vacío!</div>
