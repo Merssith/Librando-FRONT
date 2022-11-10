@@ -1,17 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Container, Pagination, Row, Table } from "react-bootstrap";
-import { useParams } from "react-router";
+import { Button, Container, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Pagination from "../commons/Pagination";
 
 const AdminBooks = () => {
-  const { type } = useParams();
-  console.log(type);
-
-  const [libros, setLibros] = useState([]);
+ const [libros, setLibros] = useState([]);
+ const [page, setPage] = useState(1);
+ const [forPage, setForPage] = useState(12);
+ const [input, setInput] = useState(1);
 
   //traigo todos los libros para editarlos
   useEffect(() => {
+    setInput(1)
+    setPage(1)
     getBooksAll();
   }, []);
 
@@ -36,6 +38,7 @@ const AdminBooks = () => {
     );
   }
 
+
   // evento de "soft delete", es decir no es un delete sino un update
   const deleteBook = (id) => {
     axios
@@ -48,9 +51,12 @@ const AdminBooks = () => {
       });
   };
 
+  const max = libros.length / forPage;
+
   return (
-    <div style={{ padding: "5%" }}>
-      <Container>
+    <div style={{ padding: "5%"}}>
+     
+      <Container  >
         <Row>
           <Link to={`/admin/books/create`}>
             <Button variant="success">Agregar nuevo libro </Button>
@@ -58,7 +64,7 @@ const AdminBooks = () => {
         </Row>
         <br></br>
         <div>
-          <Container>
+          <Container   >
             <Table striped bordered hover variant="dark">
               <thead>
                 <tr style={{ textAlign: "center" }}>
@@ -72,7 +78,7 @@ const AdminBooks = () => {
                 </tr>
               </thead>
               <tbody>
-                {libros.map((book, i) => (
+                {libros.slice((page - 1) * forPage, (page - 1) * forPage + forPage).map((book, i) => (
                   <tr
                     key={i}
                     style={{ textAlign: "center", verticalAlign: "middle" }}
@@ -80,7 +86,7 @@ const AdminBooks = () => {
                     <td>{book.id}</td>
                     <td>{book.title}</td>
                     <td>
-                      <img style={{ width: "50%" }} src={book.front} />
+                      <img  style={{ width: "55%" }} src={book.front} />
                     </td>
                     <td>${book.price}</td>
                     <td>{book.stock}</td>
@@ -104,10 +110,13 @@ const AdminBooks = () => {
             </Table>
           </Container>
         </div>
-        <div>
+        {/* <div>
           <Pagination size="sm">{items}</Pagination>
           <br />
-        </div>
+        </div> */}
+     <div className="paginacion">
+        <Pagination page={page} setPage={setPage} max={max} input={input} setInput={setInput} />
+      </div>
       </Container>
     </div>
   );

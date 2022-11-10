@@ -22,7 +22,6 @@ import { useEffect } from "react";
 
 const NavBar = ({ user }) => {
   const { cart } = useSelector((state) => state.cart);
-  // const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const query = useInput();
   const [show, setShow] = useState(false);
@@ -87,7 +86,8 @@ const NavBar = ({ user }) => {
         <Navbar.Toggle aria-controls="search-navbar-nav" />
         <Navbar.Collapse
           id="basic-navbar-nav"
-          className="justify-content-between">
+          className="justify-content-between"
+        >
           <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control
               size="sm"
@@ -112,11 +112,13 @@ const NavBar = ({ user }) => {
               size="sm"
               onClick={handleCanvasShow}
               className="me-2 mt-2"
-              style={{ position: "relative" }}>
+              style={{ position: "relative" }}
+            >
               <i className="bi bi-cart3"></i>
               <span
                 style={{ position: "absolute", top: "0px" }}
-                className="badge rounded-pill bg-danger">
+                className="badge rounded-pill bg-danger"
+              >
                 {cart.length !== 0 ? cart.length : null}
               </span>
               &nbsp;
@@ -125,7 +127,8 @@ const NavBar = ({ user }) => {
               show={show}
               onHide={handleCanvasClose}
               placement="end"
-              className="bg-color2">
+              className="bg-color2"
+            >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title>
                   <i className="bi bi-cart3"></i> Carrito
@@ -168,7 +171,8 @@ const NavBar = ({ user }) => {
                   size="sm"
                   variant="color5"
                   className="me-2 mt-2"
-                  onClick={() => navigate("/user")}>
+                  onClick={() => navigate("/user")}
+                >
                   <i className="bi bi-person-circle"> </i>
                   {user.name}
                 </Button>
@@ -176,7 +180,8 @@ const NavBar = ({ user }) => {
                   variant="color5"
                   size="sm"
                   className="me-2 mt-2"
-                  onClick={() => navigate("/logout")}>
+                  onClick={() => navigate("/logout")}
+                >
                   Log out
                 </Button>
               </>
@@ -186,14 +191,16 @@ const NavBar = ({ user }) => {
                   variant="color5"
                   size="sm"
                   className="me-2 mt-2"
-                  onClick={() => navigate("/login")}>
+                  onClick={() => navigate("/login")}
+                >
                   Acceso
                 </Button>
                 <Button
                   variant="color5"
                   size="sm"
                   className="me-2 mt-2"
-                  onClick={() => navigate("/signup")}>
+                  onClick={() => navigate("/signup")}
+                >
                   Registro
                 </Button>
               </>
