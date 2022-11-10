@@ -6,6 +6,7 @@ import { sendLoginRequest } from "../state/user";
 import useInput from "../hooks/useInput";
 
 import { Button, Form, FloatingLabel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const email = useInput();
@@ -61,11 +62,20 @@ const Login = () => {
         </Form.Group>
         <div className="logginButtons">
           <Button variant="color5" type="submit">
-            Log In
+            Acceder
           </Button>
           <Button variant="color3" onClick={handleClick}>
             Admin
           </Button>
+        </div>
+        <div className="mt-2">
+          <small>
+            ¿No tenés una cuenta?{" "}
+            <Link to="/signup" className="text-color6">
+              Registrate
+            </Link>
+            .
+          </small>
         </div>
       </Form>
     </>
