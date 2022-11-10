@@ -8,9 +8,12 @@ const AdminBooks = () => {
  const [libros, setLibros] = useState([]);
  const [page, setPage] = useState(1);
  const [forPage, setForPage] = useState(12);
+ const [input, setInput] = useState(1);
 
   //traigo todos los libros para editarlos
   useEffect(() => {
+    setInput(1)
+    setPage(1)
     getBooksAll();
   }, []);
 
@@ -83,7 +86,7 @@ const AdminBooks = () => {
                     <td>{book.id}</td>
                     <td>{book.title}</td>
                     <td>
-                      <img style={{ width: "55%" }} src={book.front} />
+                      <img  style={{ width: "55%" }} src={book.front} />
                     </td>
                     <td>${book.price}</td>
                     <td>{book.stock}</td>
@@ -107,8 +110,12 @@ const AdminBooks = () => {
             </Table>
           </Container>
         </div>
-        <div className="paginacion">
-        <Pagination page={page} setPage={setPage} max={max} />
+        {/* <div>
+          <Pagination size="sm">{items}</Pagination>
+          <br />
+        </div> */}
+     <div className="paginacion">
+        <Pagination page={page} setPage={setPage} max={max} input={input} setInput={setInput} />
       </div>
       </Container>
     </div>

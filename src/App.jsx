@@ -20,10 +20,12 @@ import AdminGenres from "./components/AdminGenres";
 import AdminOrders from "./components/AdminOrders";
 import EditGenre from "./commons/EditGenre";
 
+
 import { Container, Row, Col } from "react-bootstrap";
 import { getUserCookie } from "./state/user";
 import EditBook from "./commons/EditBook";
 import EditUser from "./commons/EditUser";
+import AdminPanel from "./components/AdminPanel";
 
 const App = () => {
   const dispatch = useDispatch();
