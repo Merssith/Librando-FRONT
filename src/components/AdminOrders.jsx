@@ -11,7 +11,7 @@ const AdminOrders = ({ user }) => {
   useEffect(() => {
     user && user.isAdmin
       ? axios
-          .get("http://localhost:3001/api/order")
+          .get("http://localhost:3001/api/order", { withCredentials: true })
           .then((res) => res.data)
           .then((orders) => setOrders(orders))
       : navigate("/");

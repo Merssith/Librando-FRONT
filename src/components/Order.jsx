@@ -14,9 +14,13 @@ const Order = ({ user }) => {
 
     statusId
       ? axios
-          .put(`http://localhost:3001/api/order/change/${order.id}`, {
-            statusId,
-          })
+          .put(
+            `http://localhost:3001/api/order/change/${order.id}`,
+            {
+              statusId,
+            },
+            { withCredentials: true }
+          )
           .then((res) => res.data)
           .then(navigate("/admin/orders"))
       : alert("Seleeciona una opción valida");

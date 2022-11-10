@@ -30,8 +30,13 @@ const ListOrders = ({ orders }) => {
                   <td>{order.user.name}</td>
                   <td>{order.user.lastname}</td>
                   <td>{order.status.name}</td>
-                  <td>
-                    <img src={order.payment.logo} alt="tipo pago"></img>
+                  <td className="text-center">
+                    <img
+                      src={order.payment.logo}
+                      alt="tipo pago"
+                      width="auto"
+                      height="30"
+                    ></img>
                   </td>
                   <td>{new Date(order.createdAt).toDateString()}</td>
                   <td>{order.total}</td>

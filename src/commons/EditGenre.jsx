@@ -12,9 +12,13 @@ const EditGenre = () => {
   const editGenre = () => {
     genre.value !== ""
       ? axios
-          .put(`http://localhost:3001/api/genres/change/${id}`, {
-            name: genre.value,
-          })
+          .put(
+            `http://localhost:3001/api/genres/change/${id}`,
+            {
+              name: genre.value,
+            },
+            { withCredentials: true }
+          )
           .then(() => navigate("/admin/genres"))
       : alert("Ingresa un género");
   };
