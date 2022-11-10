@@ -4,6 +4,7 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router";
 
 const EditBook = () => {
+  
   // const { id } = useParams();
   // const [libro, setLibro] = useState({});
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const EditBook = () => {
 
   //traigo todos los generos
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/genres`).then((res) => {
+    axios.get(`http://localhost:3001/api/genres`, { withCredentials: true }).then((res) => {
       // console.log(res.data);
       setGeneros(res.data);
     });
@@ -56,7 +57,7 @@ const EditBook = () => {
           front: e.target[5].value,
           stock: e.target[6].value,
           price: e.target[7].value,
-        })
+        }, { withCredentials: true })
         .then((res) => {
           alert(`LIBRO EDITADO!: ${res.data.title} ✅`);
         })
@@ -77,8 +78,9 @@ const EditBook = () => {
           front: e.target[5].value,
           stock: e.target[6].value,
           price: e.target[7].value,
-        })
+        },{ withCredentials: true })
         .then((res) => {
+          console.log(res);
           alert(`LIBRO NUEVO CREADO: ${res.data.title} ✅`);
           navigate(`/book/${res.data.id}`);
         });
@@ -87,6 +89,7 @@ const EditBook = () => {
 
   return (
     <>
+    <div className="table-responsive">
       {" "}
       {libro ? (
         <h2 className="mb-5">
@@ -147,7 +150,9 @@ const EditBook = () => {
         </Button>{" "}
       </Form>
       </div>
+      </div>
     </>
+    
   );
 };
 
