@@ -21,17 +21,19 @@ const AdminUsers = () => {
 
   const getUsers = () => {
     axios
-      .get("http://localhost:3001/api/users")
+      .get("http://localhost:3001/api/users", { withCredentials: true })
       .then((res) => res.data)
       .then((usr) => {
-        console.log("users", usr);
+        console.log(usr);
         setUsers(usr);
       });
   };
 
   const deleteUser = (id) => {
     axios
-      .delete(`http://localhost:3001/api/users/delete/${id}`)
+      .delete(`http://localhost:3001/api/users/${id}`, {
+        withCredentials: true,
+      })
       .then(() => {
         alert("ELIMINADO!");
       })
@@ -39,8 +41,6 @@ const AdminUsers = () => {
         getUsers();
       });
   };
-
-  
 
   return (
     <div>
@@ -79,7 +79,7 @@ const AdminUsers = () => {
                     {user.isAdmin === true ? <FcFlashAuto /> : <FcFlashOff />}
                   </td>
                   <td>
-                    <Link to={`/admin/users/edit/${user.id}`}>
+                    <Link to={`/admin/users/edit/${user.id}`} state={user}>
                       <FcEditImage />
                     </Link>
                   </td>

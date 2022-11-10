@@ -15,15 +15,21 @@ const Grid = () => {
   const [libros, setLibros] = useState([]);
   const [page, setPage] = useState(1);
   const [forPage, setForPage] = useState(12);
-
-  let ruta;
-
-  if (type) ruta = `genres/list/${type}`;
-  if (query) ruta = `books/search/${query}`;
-
-  console.log(ruta);
+  const [input, setInput] = useState(1);
 
   useEffect(() => {
+
+    setInput(1)
+    setPage(1)
+
+    let ruta;
+
+    if (type) {
+      if (type === "all") ruta = `books`;
+      else ruta = `genres/list/${type}`;
+    }
+    if (query) ruta = `books/search/${query}`;
+
     axios
       .get(`http://localhost:3001/api/${ruta}`)
       .then((res) => res.data)
@@ -38,7 +44,7 @@ const Grid = () => {
   return (
     <div>
       <div className="paginacion">
-        <Pagination page={page} setPage={setPage} max={max} />
+        <Pagination page={page} setPage={setPage} max={max} input={input} setInput={setInput} />
       </div>
       <br />
       <Container>
