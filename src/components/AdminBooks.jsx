@@ -41,8 +41,9 @@ const AdminBooks = () => {
 
   // evento de "soft delete", es decir no es un delete sino un update
   const deleteBook = (id) => {
+    console.log("ESTOOOOOO ES ID",id);
     axios
-      .put(`http://localhost:3001/api/books/delete/${id}`)
+      .put(`http://localhost:3001/api/books/delete/${id}`, { withCredentials: true })
       .then(() => {
         alert("ELIMINADO!");
       })
@@ -54,7 +55,7 @@ const AdminBooks = () => {
   const max = libros.length / forPage;
 
   return (
-    <div style={{ padding: "5%"}}>
+    <div className="table-responsive" style={{ padding: "5%"}}>
      
       <Container  >
         <Row>
