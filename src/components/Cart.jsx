@@ -131,7 +131,7 @@ const Cart = () => {
                 .toFixed(2)}
             </p>
             <div class="d-grid gap-2">
-              <button className="btn btn-color5" onClick={handleCheckout}>
+              <button className="btn btn-color5" onClick={handleCheckout} >
                 Ir a pagar
               </button>
             </div>

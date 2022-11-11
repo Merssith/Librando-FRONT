@@ -15,6 +15,8 @@ const reviews = [
 ];
 
 const Carrusel = ({ images }) => {
+
+
   return (
     <div>
       <Carousel style={{ height: 300 }}>
