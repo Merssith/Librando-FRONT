@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLoginRequest } from "../state/user";
 
@@ -14,6 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const pageBack = useLocation().state;
 
   // si ya hay un usuario logueado redirige a home
   useEffect(() => {
@@ -26,7 +27,10 @@ const Login = () => {
     dispatch(
       sendLoginRequest({ email: email.value, password: password.value })
     ).then((res) => {
-      if (res.payload) navigate("/");
+      if (res.payload) {
+        if (pageBack) navigate(pageBack);
+        else navigate("/");
+      }
     });
   };
 
