@@ -25,11 +25,11 @@ const Payment = () => {
     if (paymentMethod) {
       setPaymentMethodSelected(paymentMethod);
     }
-  }, [setPaymentMethodSelected]);
+  }, [paymentMethod]);
 
   const handleChange = (e) => {
-    setPaymentMethodSelected(e.target.value);
-    dispatch(savePaymentMethod(e.target.value));
+    setPaymentMethodSelected(e.target.id);
+    dispatch(savePaymentMethod(e.target.id));
   };
 
   const handleSubmit = (e) => {
@@ -51,9 +51,10 @@ const Payment = () => {
             <h6 className="fw-bold mb-4">Pago</h6>
             <form onSubmit={handleSubmit}>
               {payments
-                ? payments.map((payment) => (
-                    <div className="form-check mb-3">
+                ? payments.map((payment, i) => (
+                    <div className="form-check mb-3" key={i}>
                       <input
+                        id={i + 1}
                         className="form-check-input"
                         type="radio"
                         name="paymentMethod"
@@ -63,14 +64,15 @@ const Payment = () => {
                       />
                       <label className="form-check-label">
                         <div className="row">
-                          {
-                            <div className="col-8 text-center">
-                              <img
-                                src={payment.logo}
-                                height="30"
-                                width="auto"></img>
-                            </div>
-                          }
+                          <div className="col-8 text-center">
+                            <img
+                              src={payment.logo}
+                              alt="logo"
+                              height="30"
+                              width="auto"
+                            ></img>
+                          </div>
+
                           <div className="col">{payment.name}</div>
                         </div>
                       </label>

@@ -4,11 +4,13 @@ import ProgressBar from "../commons/ProgressBar";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../state/actions/orderActions";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 const Shipping = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { shippingAddress } = useSelector((state) => state.order);
+  const user = useSelector((state) => state.user);
 
   const [street, setStreet] = useState("");
   const [num, setNum] = useState("");
@@ -16,6 +18,7 @@ const Shipping = () => {
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
   const [zip, setZip] = useState("");
+  const [address, setAddress] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,17 +35,37 @@ const Shipping = () => {
   };
 
   useEffect(() => {
-    shippingAddress.street ? setStreet(shippingAddress.street) : setStreet("");
-    shippingAddress.num ? setNum(shippingAddress.num) : setNum("");
-    shippingAddress.apartment
-      ? setApartment(shippingAddress.apartment)
-      : setApartment("");
-    shippingAddress.city ? setCity(shippingAddress.city) : setCity("");
-    shippingAddress.province
-      ? setProvince(shippingAddress.province)
-      : setProvince("");
-    shippingAddress.zip ? setZip(shippingAddress.zip) : setZip("");
-  }, [shippingAddress]);
+    if (user)
+      axios
+        .get(`http://localhost:3001/api/users/get/${user.id}`, {
+          withCredentials: true,
+        })
+        .then((res) => res.data)
+        .then((user) => {
+          setAddress(user.address.split(","));
+          setStreet(address[0]);
+          setNum(address[1]);
+          setApartment(address[2]);
+          setCity(address[3]);
+          setProvince(address[4]);
+          setZip(address[5]);
+        });
+
+    if (!address) {
+      shippingAddress.street
+        ? setStreet(shippingAddress.street)
+        : setStreet("");
+      shippingAddress.num ? setNum(shippingAddress.num) : setNum("");
+      shippingAddress.apartment
+        ? setApartment(shippingAddress.apartment)
+        : setApartment("");
+      shippingAddress.city ? setCity(shippingAddress.city) : setCity("");
+      shippingAddress.province
+        ? setProvince(shippingAddress.province)
+        : setProvince("");
+      shippingAddress.zip ? setZip(shippingAddress.zip) : setZip("");
+    }
+  }, [shippingAddress, user, address]);
 
   return (
     <section >

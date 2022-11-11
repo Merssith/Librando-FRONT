@@ -11,16 +11,15 @@ import axios from "axios";
 
 const Grid = () => {
   const { type, query } = useParams();
-
   const [libros, setLibros] = useState([]);
   const [page, setPage] = useState(1);
-  const [forPage, setForPage] = useState(12);
   const [input, setInput] = useState(1);
+  const forPage = 12
 
+  
   useEffect(() => {
-
-    setInput(1)
-    setPage(1)
+    setInput(1);
+    setPage(1);
 
     let ruta;
 
@@ -34,7 +33,6 @@ const Grid = () => {
       .get(`http://localhost:3001/api/${ruta}`)
       .then((res) => res.data)
       .then((books) => {
-        console.log(books);
         setLibros(books);
       });
   }, [type, query]);
@@ -44,7 +42,13 @@ const Grid = () => {
   return (
     <div>
       <div className="paginacion">
-        <Pagination page={page} setPage={setPage} max={max} input={input} setInput={setInput} />
+        <Pagination
+          page={page}
+          setPage={setPage}
+          max={max}
+          input={input}
+          setInput={setInput}
+        />
       </div>
       <br />
       <Container>
@@ -60,7 +64,13 @@ const Grid = () => {
       </Container>
       <br />
       <div className="paginacion">
-        <Pagination page={page} setPage={setPage} max={max} input={input} setInput={setInput} />
+        <Pagination
+          page={page}
+          setPage={setPage}
+          max={max}
+          input={input}
+          setInput={setInput}
+        />
       </div>
     </div>
   );

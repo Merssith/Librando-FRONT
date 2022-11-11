@@ -7,8 +7,8 @@ import Pagination from "../commons/Pagination";
 const AdminBooks = () => {
   const [libros, setLibros] = useState([]);
   const [page, setPage] = useState(1);
-  const [forPage, setForPage] = useState(12);
   const [input, setInput] = useState(1);
+  const forPage = 12
 
   //traigo todos los libros para editarlos
   useEffect(() => {
@@ -22,25 +22,13 @@ const AdminBooks = () => {
       .get(`http://localhost:3001/api/books/`)
       .then((res) => res.data)
       .then((books) => {
-        console.log(books);
         setLibros(books);
       });
   };
 
-  //para la paginacion
-  let active = 1;
-  let items = [];
-  for (let number = 1; number <= 7; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>
-    );
-  }
 
   // evento de "soft delete", es decir no es un delete sino un update
   const deleteBook = (id) => {
-    console.log("ESTOOOOOO ES ID",id);
     axios
       .put(`http://localhost:3001/api/books/delete/${id}`, { withCredentials: true })
       .then(() => {
@@ -92,7 +80,7 @@ const AdminBooks = () => {
                       <td>{book.id}</td>
                       <td>{book.title}</td>
                       <td>
-                        <img style={{ width: "55%" }} src={book.front} />
+                        <img style={{ width: "55%" }} src={book.front} alt="front"/>
                       </td>
                       <td>${book.price}</td>
                       <td>{book.stock}</td>

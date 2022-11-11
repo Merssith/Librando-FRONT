@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 const ListOrders = ({ orders }) => {
   const user = useSelector((state) => state.user);
+
   return (
     <div className="table-responsive">
       <h6>
@@ -34,7 +35,7 @@ const ListOrders = ({ orders }) => {
                   <td>{order.status.name}</td>
                   <td className="text-center">
                     <img
-                      src={order.payment.logo}
+                      src={order.payment ? order.payment.logo : ""}
                       alt="tipo pago"
                       width="auto"
                       height="30"

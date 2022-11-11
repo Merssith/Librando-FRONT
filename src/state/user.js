@@ -25,7 +25,10 @@ export const sendLoginRequest = createAsyncThunk(
       })
 
       .catch((error) => {
-        console.log(`LOG IN ERROR`, error);
+        const message = error.response.data;
+        message.includes("Usuario")
+          ? alert("El usuario no existe")
+          : alert("Contraseña incorrecta");
       });
   }
 );
@@ -40,7 +43,7 @@ export const sendLogoutRequest = createAsyncThunk("USER_LOGOUT", () => {
       return initialState;
     })
     .catch((error) => {
-      console.log(`LOG OUT ERROR`, error);
+      alert("Error: No se pudo desloguear");
     });
 });
 

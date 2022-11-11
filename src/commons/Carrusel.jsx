@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel, Row } from "react-bootstrap";
 
-const Carrusel = ({images}) => {
+const Carrusel = ({ images }) => {
   return (
     <Row className="mt-3">
       <Carousel md={12}>
