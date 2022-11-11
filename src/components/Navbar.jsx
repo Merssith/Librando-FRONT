@@ -47,15 +47,13 @@ const NavBar = ({ user }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`/search/${query.value}`);
+    if (query.value) navigate(`/search/${query.value}`);
   };
 
   const handleClearCart = () => {
     dispatch(clearCart());
     handleCanvasClose();
   };
-
-  let totalBooks = 0;
 
   return (
     <Navbar bg="color3" expand="md" fixed="top" className="myNavbar">
@@ -137,7 +135,7 @@ const NavBar = ({ user }) => {
               <Offcanvas.Body className="justify-content-center">
                 <CartCanvas />
                 <br />
-                <Row >
+                <Row>
                   {cart.length !== 0 ? (
                     <>
                       <Col sm={9}>
@@ -146,7 +144,7 @@ const NavBar = ({ user }) => {
                           size="sm"
                           variant="color5"
                           id="reload"
-                          >
+                        >
                           Vaciar carrito
                         </Button>
                       </Col>
@@ -154,7 +152,8 @@ const NavBar = ({ user }) => {
                         <Button
                           onClick={handleCanvasSubmit}
                           size="sm"
-                          variant="color5">
+                          variant="color5"
+                        >
                           Comprar
                         </Button>
                       </Col>

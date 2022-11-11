@@ -24,9 +24,13 @@ const AdminGenres = ({ user }) => {
   const addGenre = () => {
     newGenre.value !== ""
       ? axios
-          .post(`http://localhost:3001/api/genres/create`, {
-            name: newGenre.value,
-          })
+          .post(
+            `http://localhost:3001/api/genres/create`,
+            {
+              name: newGenre.value,
+            },
+            { withCredentials: true }
+          )
           .then(() => fetchGenres())
       : alert("Ingresa un género");
   };
@@ -41,13 +45,15 @@ const AdminGenres = ({ user }) => {
               "No puede eliminar. Hay productos pertencientes a este género"
             )
           : axios
-              .delete(`http://localhost:3001/api/genres/delete/${id}`)
+              .delete(`http://localhost:3001/api/genres/delete/${id}`, {
+                withCredentials: true,
+              })
               .then(() => fetchGenres())
       );
   };
 
   return (
-    <>
+    <div className="table-responsive">
       <h5>
         <strong>Listado de Géneros</strong>
       </h5>
@@ -96,7 +102,7 @@ const AdminGenres = ({ user }) => {
           <i className="bi bi-bookmark-plus"> Añadir</i>
         </Button>
       </InputGroup>
-    </>
+    </div>
   );
 };
 
