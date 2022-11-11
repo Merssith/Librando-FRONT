@@ -15,7 +15,7 @@ function Book({ book, history }) {
   };
 
   return (
-    <div>
+    <div className="table-responsive">
       <Container>
         <Row>
           <Col md={1}>
@@ -32,7 +32,7 @@ function Book({ book, history }) {
 
         <Row>
           <Col md={5} className="mb-4">
-            <img src={book.front} alt="img"></img>
+            <img src={book.front} alt="img" style={{width:"500px"}}></img>
           </Col>
           <Col md={7}>
             <Stack gap={1}>
@@ -55,8 +55,7 @@ function Book({ book, history }) {
                 <strong>Stock:</strong> {book.stock}
               </p>
               <p>
-                <strong>Precio:</strong> $
-                {book.price ? book.price.toFixed(2) : ""}
+                <strong>Precio:</strong> ${book.price ? book.price.toFixed(2) : ""}
               </p>
               <div style={{ marginTop: "10px" }}>
                 <Button variant="color5" onClick={handleAddToCart}>

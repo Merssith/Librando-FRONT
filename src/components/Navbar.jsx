@@ -90,7 +90,7 @@ const NavBar = ({ user }) => {
             <Form.Control
               size="sm"
               type="search"
-              placeholder="Search"
+              placeholder="Buscá por título o autor"
               className="me-2 mt-2"
               aria-label="Search"
               {...query}
@@ -100,9 +100,8 @@ const NavBar = ({ user }) => {
               variant="outline-color5"
               size="sm"
               className="mt-2"
-              type="submit"
-            >
-              Search
+              type="submit">
+              <i class="bi bi-search"></i>
             </Button>
           </Form>
           <Nav>

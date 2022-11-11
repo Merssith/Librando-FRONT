@@ -7,6 +7,7 @@ import axios from "axios";
 import useInput from "../hooks/useInput";
 
 import { Button, Col, Row, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const user = useSelector((state) => state.user);
@@ -52,8 +53,13 @@ const Signup = () => {
         .then((res) => res.data)
         .then(({ email }) => {
           // tras el registro hacemos login automatico y redirigimos a home
-          dispatch(sendLoginRequest({ email, password: password.value }));
-          navigate("/");
+
+          if (user.isAdmin) {
+            navigate("/admin/users");
+          } else {
+            dispatch(sendLoginRequest({ email, password: password.value }));
+            navigate("/");
+          }
         })
         .catch((error) => console.log(error));
     }
@@ -69,7 +75,16 @@ const Signup = () => {
       ) : (
         <div>
           <h2 className="is-title is-size-2">Registrate</h2>
-          <p className="mb-4">Rellena el formulario para comenzar.</p>
+          <p>
+            Completá el formulario para comenzar. <br />
+            <small className="mb-6">
+              ¿Ya tenés una cuenta?{" "}
+              <Link to="/login" className="text-color6">
+                Ingresá
+              </Link>
+              .
+            </small>
+          </p>
         </div>
       )}
 
@@ -131,15 +146,15 @@ const Signup = () => {
         </Row>
         <Row className="mb-3">
           <Form.Group as={Col} md="8" controlId="validationCustom04">
-            <Form.Label>Direccion</Form.Label>
+            <Form.Label>Calle</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Direccion"
+              placeholder="Calle"
               required
               {...dir}
             />
             <Form.Control.Feedback type="invalid">
-              Por favor introduce una direccion.
+              Por favor introduce una calle.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="2" controlId="validationCustom05">
