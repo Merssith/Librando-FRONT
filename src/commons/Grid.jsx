@@ -59,6 +59,9 @@ const Grid = () => {
         </Row>
       </Container>
       <br />
+      <div className="paginacion">
+        <Pagination page={page} setPage={setPage} max={max} input={input} setInput={setInput} />
+      </div>
     </div>
   );
 };

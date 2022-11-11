@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.min-height-view-port {
+  min-height: 69vh;
+}
+
 body {
   padding-top: 80px;
 }

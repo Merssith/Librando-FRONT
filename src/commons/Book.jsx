@@ -32,7 +32,7 @@ function Book({ book, history }) {
 
         <Row>
           <Col md={5} className="mb-4">
-            <img src={book.front} alt="img"></img>
+            <img src={book.front} alt="img" style={{width:"500px"}}></img>
           </Col>
           <Col md={7}>
             <Stack gap={1}>

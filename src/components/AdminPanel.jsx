@@ -6,7 +6,7 @@ import { ListGroup } from "react-bootstrap";
 const AdminPanel = () => {
   return (
     <>
-      <h5>Panel de Administrador</h5>
+      <h5 className="mt-3 ps-2">Panel de Administrador</h5>
       <ListGroup variant="flush">
         <ListGroup.Item
           action

@@ -11,6 +11,9 @@ import Logout from "./components/Logout";
 import Signup from "./components/Signup";
 import User from "./components/User";
 import Cart from "./components/Cart";
+import Shipping from "./components/Shipping";
+import Payment from "./components/Payment";
+import PlaceOrder from "./components/PlaceOrder";
 import Order from "./components/Order";
 import AdminPanel from "./components/AdminPanel";
 import AdminUsers from "./components/AdminUsers";
@@ -45,8 +48,8 @@ const App = () => {
           </Col>
         ) : (
           ""
-        )} 
-        <Col md={9}>
+        )}
+         <Col md={ user.isAdmin ? 9 : 12}>
           <Container fluid="md my-4">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -59,6 +62,9 @@ const App = () => {
               <Route path="/search/:query" element={<Grid />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/placeOrder" element={<PlaceOrder />} />
               <Route path="/admin/users" element={<AdminUsers />} />
               <Route path="/admin/books"  element={<AdminBooks />} />
               <Route path="/admin/books/edit/:id"   element={<EditBook />} />
