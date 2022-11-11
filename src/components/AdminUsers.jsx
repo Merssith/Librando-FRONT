@@ -50,51 +50,48 @@ const AdminUsers = () => {
           <FcAndroidOs />
         </button>
       </Link>
-
-      <div style={{ padding: "5%" }}>
-        <div>
-          <Table striped bordered hover variant="dark">
-            <thead>
-              <tr style={{ textAlign: "center" }}>
-                <th>Id</th>
-                <th>name</th>
-                <th>lastname</th>
-                <th>e-mail</th>
-                <th>isAdmin</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+      <div className="table-responsive" style={{ padding: "5%" }}>
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr style={{ textAlign: "center" }}>
+              <th>Id</th>
+              <th>name</th>
+              <th>lastname</th>
+              <th>e-mail</th>
+              <th>isAdmin</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, i) => (
+              <tr
+                key={i}
+                style={{ textAlign: "center", verticalAlign: "middle" }}
+              >
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.lastname}</td>
+                <td>${user.email}</td>
+                <td>
+                  {user.isAdmin === true ? <FcFlashAuto /> : <FcFlashOff />}
+                </td>
+                <td>
+                  <Link to={`/admin/users/edit/${user.id}`} state={user}>
+                    <FcEditImage />
+                  </Link>
+                </td>
+                <td style={{ textAlign: "center" }}>
+                  <FcEmptyTrash
+                    onClick={() => {
+                      deleteUser(user.id);
+                    }}
+                  />
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {users.map((user, i) => (
-                <tr
-                  key={i}
-                  style={{ textAlign: "center", verticalAlign: "middle" }}
-                >
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.lastname}</td>
-                  <td>${user.email}</td>
-                  <td>
-                    {user.isAdmin === true ? <FcFlashAuto /> : <FcFlashOff />}
-                  </td>
-                  <td>
-                    <Link to={`/admin/users/edit/${user.id}`} state={user}>
-                      <FcEditImage />
-                    </Link>
-                  </td>
-                  <td style={{ textAlign: "center" }}>
-                    <FcEmptyTrash
-                      onClick={() => {
-                        deleteUser(user.id);
-                      }}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+            ))}
+          </tbody>
+        </Table>
       </div>
     </div>
   );

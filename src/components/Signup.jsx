@@ -52,8 +52,13 @@ const Signup = () => {
         .then((res) => res.data)
         .then(({ email }) => {
           // tras el registro hacemos login automatico y redirigimos a home
-          dispatch(sendLoginRequest({ email, password: password.value }));
-          navigate("/");
+
+          if (user.isAdmin) {
+            navigate("/admin/users");
+          } else {
+            dispatch(sendLoginRequest({ email, password: password.value }));
+            navigate("/");
+          }
         })
         .catch((error) => console.log(error));
     }
