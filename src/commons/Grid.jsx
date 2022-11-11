@@ -11,12 +11,12 @@ import axios from "axios";
 
 const Grid = () => {
   const { type, query } = useParams();
-
   const [libros, setLibros] = useState([]);
   const [page, setPage] = useState(1);
-  const [forPage, setForPage] = useState(12);
   const [input, setInput] = useState(1);
+  const forPage = 12
 
+  
   useEffect(() => {
     setInput(1);
     setPage(1);

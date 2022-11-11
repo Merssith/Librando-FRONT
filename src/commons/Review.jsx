@@ -76,19 +76,19 @@ const Review = ({ book }) => {
   }, [user, book]);
 
   const estrellas = (num) => {
-    if (num == 1) {
+    if (num === 1) {
       return "⭐";
     }
-    if (num == 2) {
+    if (num === 2) {
       return "⭐⭐";
     }
-    if (num == 3) {
+    if (num === 3) {
       return "⭐⭐⭐";
     }
-    if (num == 4) {
+    if (num === 4) {
       return "⭐⭐⭐⭐";
     }
-    if (num == 5) {
+    if (num === 5) {
       return "⭐⭐⭐⭐⭐";
     }
   };

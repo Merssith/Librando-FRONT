@@ -52,9 +52,7 @@ const PlaceOrder = () => {
         <div className="row justify-content-center">
           <div className="col-md-11">
             <h6 className="fw-bold mb-4">Resumen</h6>
-            <p>Podés revisar el pedido en tu perfil.</p>
-            <p>Gracias por elegirnos.</p>
-            <p>Direccion: {shippingAdress}</p>
+            
           </div>
         </div>
         <Button className="btn-color5 mt-1" onClick={handleConfirm}>

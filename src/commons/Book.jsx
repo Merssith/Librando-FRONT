@@ -17,11 +17,11 @@ function Book({ book, history }) {
   };
 
   const estrellas = (num) =>{
-  if(num ==1){return "⭐"}
-  if(num ==2){return "⭐⭐"}
-  if(num ==3){return "⭐⭐⭐"}
-  if(num ==4){return "⭐⭐⭐⭐"}
-  if(num ==5){return "⭐⭐⭐⭐⭐"} }
+  if(num ===1){return "⭐"}
+  if(num ===2){return "⭐⭐"}
+  if(num ===3){return "⭐⭐⭐"}
+  if(num ===4){return "⭐⭐⭐⭐"}
+  if(num ===5){return "⭐⭐⭐⭐⭐"} }
 
   useEffect(() => {
       axios

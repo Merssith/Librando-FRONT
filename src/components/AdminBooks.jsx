@@ -7,8 +7,8 @@ import Pagination from "../commons/Pagination";
 const AdminBooks = () => {
   const [libros, setLibros] = useState([]);
   const [page, setPage] = useState(1);
-  const [forPage, setForPage] = useState(12);
   const [input, setInput] = useState(1);
+  const forPage = 12
 
   //traigo todos los libros para editarlos
   useEffect(() => {
@@ -80,7 +80,7 @@ const AdminBooks = () => {
                       <td>{book.id}</td>
                       <td>{book.title}</td>
                       <td>
-                        <img style={{ width: "55%" }} src={book.front} />
+                        <img style={{ width: "55%" }} src={book.front} alt="front"/>
                       </td>
                       <td>${book.price}</td>
                       <td>{book.stock}</td>
