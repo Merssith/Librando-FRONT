@@ -1,70 +1,178 @@
-# Getting Started with Create React App
+<a name="readme-top"></a>
+[![Contributors][contributors-shield]][contributors-url]
+[![Issues][issues-shield]][issues-url]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/Merssith/Librando-FRONT">
+    <img src="public/logo.png" alt="Logo" width="300">
+  </a>
 
-## Available Scripts
+<h3 align="center">FRONTEND ECOMMERCE LIBRANDO BOOKSTORE</h3>
 
-In the project directory, you can run:
+  <p align="center">
+    Proyecto de ecommerce para bootcamp Plataforma 5
+    <br />
+    <a href="https://github.com/Merssith/Librando-FRONT"><strong>Explora nuestro proyecto »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/Merssith/Librando-FRONT/issues">Reportar un bug</a>
+    ·
+    <a href="https://github.com/Merssith/Librando-FRONT/issues">Solicitar una feature</a>
+  </p>
+</div>
 
-### `npm start`
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Contenido</summary>
+  <ol>
+    <li>
+      <a href="#sobre-el-proyecto">Sobre el proyecto</a>
+      <ul>
+        <li><a href="#stack-de-tecnologías">Stack de tecnologías</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#empezando">Empezando</a>
+      <ul>
+        <li><a href="#pre-requisitos">Pre-requisitos</a></li>
+        <li><a href="#instalación">Instalación</a></li>
+      </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contribuye">Contribuye</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#agradecimientos">Agradecimientos</a></li>
+  </ol>
+</details>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<!-- ABOUT THE PROJECT -->
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Sobre el proyecto
 
-### `npm test`
+<img src="public/project.png" alt="Logo" width="100%">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+“Librando” es un proyecto de e-commerce de venta de novelas.
+Los usuarios podrán registrarse y navegar a través de las categorías de géneros de novelas, realizar búsquedas y comprar sus novelas favoritas fácilmente.
+También contará con un módulo administrador que permitira gestionar toda la base de datos del sitio.
 
-### `npm run build`
+<p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Stack de tecnologías
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Axios
+- React
+- Redux
+- React Bootstrap y CSS
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+<p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<!-- GETTING STARTED -->
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Empezando
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Este FrontEnd esta conectado a un Backend que es necesario para poder operar
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Pre-requisitos
 
-## Learn More
+Deberas complir los siguientes pre-requisitos para poder utilizar este proyecto.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Levanta el [Backend](https://github.com/Merssith/Librando-BACK)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Instalación
 
-### Code Splitting
+1. Clona el repositorio en tu local
+   ```sh
+   git clone https://github.com/Merssith/Librando-FRONT.git
+   ```
+2. Instala las dependencias NPM
+   ```sh
+   npm install
+   ```
+3. Levanta la app
+   ```sh
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
 
-### Analyzing the Bundle Size
+<!-- API  -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Roadmap
 
-### Making a Progressive Web App
+- [x] Modulo de usuario
+  - [x] Registrarse
+  - [x] Login/Logout
+  - [x] Persistencia de carrito y de usuario
+  - [x] Buscar libros por autor y nombre del libro
+  - [x] Navegar por las categorias
+  - [x] Ver los detalles del libro
+  - [x] Dejar una review de un libro comprado
+  - [x] Recibir correos de confirmación
+  - [x] Cerrar una compra
+  - [x] Ver datos de usuario
+  - [x] Ver compras anteriores
+- [x] Modulo de administrador
+  - [x] Ver todos los usuarios
+  - [x] Promover usuarios a admin
+  - [x] Eliminar usuarios
+  - [x] Ver todas las ordenes
+  - [x] Modificar una orden
+  - [x] Agregar, editar y eliminar libros del catalogo
+  - [x] Agregar, editar y eliminar generos del catalogo (categorias)
+- [ ] Otros
+  - [ ] OAuth2
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
 
-### Advanced Configuration
+<!-- CONTRIBUTING -->
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Contribuye
 
-### Deployment
+<p>Las contribuciones de la comunidad Dev nos ayudan a aprender, inspirarnos y crear cosas nuevas! Todas las contrinuciones seran muy bienvenidas!</p>
+<p>Si tienes algunas sugerencia para mejorar nuestro proyecto, por favor forkea el repositorio y crea un pull request.</p>
+<p>Muchas gracias!</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Forkea el repositorio
+2. Crea tu branch (`git checkout -b feature/MiFeature`)
+3. Comitea tus cambios (`git commit -m 'Agrego MiFeature'`)
+4. Pushea a la branch (`git push origin feature/MiFeature`)
+5. Abri un pull request
 
-### `npm run build` fails to minify
+<p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- CONTACT -->
+
+## Contacto
+
+- Mercedes Salcedo - mercedes.salcedo1989@gmail.com
+- Franco Livelli - franco.livelli@gmail.com
+- Mikelzon Sarabia - Mikelzonsarabia@gmail.com
+- Alberto Carrillo de Comas - albertokarri@gmail.com
+- Diego Siboldi - die.siboldi@gmail.com
+- Julian Pacheco - jpjulianpacheco@gmail.com
+
+Link del proyecto: [https://github.com/Merssith/Librando-FRONT](https://github.com/Merssith/Librando-FRONT)
+
+<p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Agradecimientos
+
+- A Pablo Burgos
+- A todo el staff de Plataforma 5
+- A los jurados
+- A nuestros compañeros de bootcamp
+
+<p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/Merssith/Librando-FRONT.svg?style=for-the-badge
+[contributors-url]: https://github.com/Merssith/Librando-FRONT/graphs/contributors
+[issues-shield]: https://img.shields.io/github/issues/Merssith/Librando-FRONT.svg?style=for-the-badge
+[issues-url]: https://github.com/Merssith/Librando-FRONT/issues
