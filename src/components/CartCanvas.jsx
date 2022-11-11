@@ -6,8 +6,6 @@ import { removeFromCart } from "../state/actions/cartActions";
 import { ADD_TO_CART } from "../state/constants/cartConstants";
 
 const CartCanvas = () => {
-  const list = JSON.parse(localStorage.getItem("cart"));
-
   const { cart } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
@@ -33,7 +31,10 @@ const CartCanvas = () => {
       <Row className="border-bottom border-color1">
         {cart.map((product, i) => (
           <Row key={i} className="mb-4">
-            <Col md={4} className="d-flex align-items-center border-end border-color1">
+            <Col
+              md={4}
+              className="d-flex align-items-center border-end border-color1"
+            >
               <img src={product.front} alt="Portada" />
             </Col>
             <Col md={8}>
@@ -59,8 +60,9 @@ const CartCanvas = () => {
               <Button
                 size="sm"
                 variant="color5"
-                onClick={() => dispatch(removeFromCart(product))}>
-                <i class="bi bi-trash3"></i>
+                onClick={() => dispatch(removeFromCart(product))}
+              >
+                <i className="bi bi-trash3"></i>
               </Button>
             </Col>
           </Row>
@@ -69,7 +71,14 @@ const CartCanvas = () => {
       <Row className="mt-4">
         {cart.length !== 0 ? (
           <Col>
-            <strong>Total: </strong>${cart.reduce((currentSum, currentCartItem)=>currentSum+currentCartItem.quantity*currentCartItem.price, 0).toFixed(2)}
+            <strong>Total: </strong>$
+            {cart
+              .reduce(
+                (currentSum, currentCartItem) =>
+                  currentSum + currentCartItem.quantity * currentCartItem.price,
+                0
+              )
+              .toFixed(2)}
           </Col>
         ) : null}
       </Row>

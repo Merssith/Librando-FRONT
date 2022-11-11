@@ -9,7 +9,6 @@ export const addToCart = (book) => async (dispatch) => {
     ? JSON.parse(localStorage.getItem("cart"))
     : [];
   let duplicates = cart.filter((cartItem) => cartItem.id === book.id);
-  console.log("DUPLICATE ADD",duplicates)
   if (duplicates.length === 0) {
     const bookToAdd = {
       ...book,
