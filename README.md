@@ -5,21 +5,21 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Merssith/Librando-BACK">
-    <img src="images/logo.png" alt="Logo" width="300">
+  <a href="https://github.com/Merssith/Librando-FRONT">
+    <img src="public/logo.png" alt="Logo" width="300">
   </a>
 
-<h3 align="center">BACKEND ECOMMERCE LIBRANDO BOOKSTORE</h3>
+<h3 align="center">FRONTEND ECOMMERCE LIBRANDO BOOKSTORE</h3>
 
   <p align="center">
     Proyecto de ecommerce para bootcamp Plataforma 5
     <br />
-    <a href="https://github.com/Merssith/Librando-BACK"><strong>Explora nuestro proyecto »</strong></a>
+    <a href="https://github.com/Merssith/Librando-FRONT"><strong>Explora nuestro proyecto »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Merssith/Librando-BACK/issues">Reportar un bug</a>
+    <a href="https://github.com/Merssith/Librando-FRONT/issues">Reportar un bug</a>
     ·
-    <a href="https://github.com/Merssith/Librando-BACK/issues">Solicitar una feature</a>
+    <a href="https://github.com/Merssith/Librando-FRONT/issues">Solicitar una feature</a>
   </p>
 </div>
 
@@ -40,7 +40,6 @@
         <li><a href="#instalación">Instalación</a></li>
       </ul>
     </li>
-    <li><a href="#metodos-de-api">Metodos de API</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contribuye">Contribuye</a></li>
     <li><a href="#contacto">Contacto</a></li>
@@ -52,7 +51,7 @@
 
 ## Sobre el proyecto
 
-<img src="images/project.png" alt="Logo" width="100%">
+<img src="public/project.png" alt="Logo" width="100%">
 
 “Librando” es un proyecto de e-commerce de venta de novelas.
 Los usuarios podrán registrarse y navegar a través de las categorías de géneros de novelas, realizar búsquedas y comprar sus novelas favoritas fácilmente.
@@ -62,17 +61,11 @@ También contará con un módulo administrador que permitira gestionar toda la b
 
 ### Stack de tecnologías
 
-- NodeJS
-- Nodemon
-- Express
-- Sequelize
-- Postgres
-- Voleyball
-- Bcrypt
-- JWT
-- Handlebars
-- Nodemailer
-- FS
+- Axios
+- React
+- Redux
+- React Bootstrap y CSS
+
 
 <p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
 
@@ -80,49 +73,32 @@ También contará con un módulo administrador que permitira gestionar toda la b
 
 ## Empezando
 
-Actualmente la base de datos se encuentra totalmente de manera local. Por lo tanto, deberás seguir estas instrucciones para levantar el proyecto de backend.
+Este FrontEnd esta conectado a un Backend que es necesario para poder operar
 
 ### Pre-requisitos
 
-Deberas complir los siguientes pre-requisitos para poder utilizar este proyecto
+Deberas complir los siguientes pre-requisitos para poder utilizar este proyecto.
 
-- DB: Crea la DB utilizando psql
-  ```sh
-  createdb librando
-  ```
+Levanta el [Backend](https://github.com/Merssith/Librando-BACK)
 
 ### Instalación
 
 1. Clona el repositorio en tu local
    ```sh
-   git clone https://github.com/Merssith/Librando-BACK.git
+   git clone https://github.com/Merssith/Librando-FRONT.git
    ```
 2. Instala las dependencias NPM
    ```sh
    npm install
    ```
-3. Seedea la base de datos
+3. Levanta la app
    ```sh
-   npm run seed
-   ```
-4. Levanta el servidor
-   ```sh
-   npm run server
+   npm start
    ```
 
 <p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
 
 <!-- API  -->
-
-## Metodos de API
-
-<img src="https://cdn.shopify.com/s/files/1/0057/5668/2355/files/Postman-logo-orange-2021_1155x.png?v=1637252529" alt="Logo" width="40%">
-
-Puedes ver todos los metodos de la API descargando la [colección de POSTMAN](https://www.getpostman.com/collections/7cf61cf99122ccd4181f)
-
-<p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
-
-<!-- ROADMAP -->
 
 ## Roadmap
 
@@ -178,7 +154,7 @@ Puedes ver todos los metodos de la API descargando la [colección de POSTMAN](ht
 - Diego Siboldi - die.siboldi@gmail.com
 - Julian Pacheco - jpjulianpacheco@gmail.com
 
-Link del proyecto: [https://github.com/Merssith/Librando-BACK](https://github.com/Merssith/Librando-BACK)
+Link del proyecto: [https://github.com/Merssith/Librando-FRONT](https://github.com/Merssith/Librando-FRONT)
 
 <p align="right">(<a href="#readme-top">volver a arriba</a>)</p>
 
@@ -196,7 +172,7 @@ Link del proyecto: [https://github.com/Merssith/Librando-BACK](https://github.co
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/Merssith/Librando-BACK.svg?style=for-the-badge
-[contributors-url]: https://github.com/Merssith/Librando-BACK/graphs/contributors
-[issues-shield]: https://img.shields.io/github/issues/Merssith/Librando-BACK.svg?style=for-the-badge
-[issues-url]: https://github.com/Merssith/Librando-BACK/issues
+[contributors-shield]: https://img.shields.io/github/contributors/Merssith/Librando-FRONT.svg?style=for-the-badge
+[contributors-url]: https://github.com/Merssith/Librando-FRONT/graphs/contributors
+[issues-shield]: https://img.shields.io/github/issues/Merssith/Librando-FRONT.svg?style=for-the-badge
+[issues-url]: https://github.com/Merssith/Librando-FRONT/issues
