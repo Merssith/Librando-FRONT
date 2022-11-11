@@ -51,12 +51,11 @@ const PlaceOrder = () => {
       <div className="container border-0 mt-3 py-3">
         <div className="row justify-content-center">
           <div className="col-md-11">
-            <h6 className="fw-bold mb-4">Resumen</h6>
-            
+            <h6 className="fw-bold mb-4">Confirmar compra</h6>
           </div>
         </div>
-        <Button className="btn-color5 mt-1" onClick={handleConfirm}>
-          Confirmar
+        <Button type="submit" className="btn-color5 mt-1 ms-5">
+          Continuar
         </Button>
       </div>
     </section>

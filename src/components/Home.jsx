@@ -1,17 +1,14 @@
 import React from "react";
-import img1 from "../assets/img1.jpeg";
-import img2 from "../assets/img2.jpeg";
-import img3 from "../assets/img3.jpeg";
-import Carrusel from "../commons/Carrusel";
+import home from "../assets/home.png";
 import { Row } from "react-bootstrap";
 
 const Home = () => {
   return (
     <>
-      <Row>
-        <h1 className="display-3 text-center">Welcome to Librando!</h1>
+      <Row >
+        <h1 className="display-3 text-center">¡Bienvenido!</h1>
       </Row>
-      <Carrusel images={[img1, img2, img3]} />
+      <img className="mt-2 text-center" height="700px" width="auto" src={home}></img>
     </>
   );
 };

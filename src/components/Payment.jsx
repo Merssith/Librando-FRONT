@@ -64,14 +64,14 @@ const Payment = () => {
                       />
                       <label className="form-check-label">
                         <div className="row">
-                          <div className="col-8 text-center">
+                          {/* <div className="col-8 text-center">
                             <img
                               src={payment.logo}
                               alt="logo"
                               height="30"
                               width="auto"
                             ></img>
-                          </div>
+                          </div> */}
 
                           <div className="col">{payment.name}</div>
                         </div>
