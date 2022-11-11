@@ -1,14 +1,18 @@
 import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import ProgressBar from "../commons/ProgressBar";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { savePaymentMethod } from "../state/actions/orderActions";
 
 const Payment = () => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const { paymentMethod } = useSelector((state) => state.order);
   const [payments, setPayments] = useState([]);
+  const [paymentMethodSelected, setPaymentMethodSelected] = useState("");
 
   useEffect(() => {
     axios
@@ -17,10 +21,22 @@ const navigate = useNavigate()
       .then((payments) => setPayments(payments));
   }, []);
 
-const handleSubmit = (e) => {
+  useEffect(() => {
+    if (paymentMethod) {
+      setPaymentMethodSelected(paymentMethod);
+    }
+  }, [setPaymentMethodSelected]);
+
+  const handleChange = (e) => {
+    setPaymentMethodSelected(e.target.value);
+    dispatch(savePaymentMethod(e.target.value));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(savePaymentMethod(paymentMethodSelected));
     navigate("/placeOrder");
-}
+  };
 
   return (
     <section>
@@ -41,23 +57,27 @@ const handleSubmit = (e) => {
                         className="form-check-input"
                         type="radio"
                         name="paymentMethod"
-                        value="Efectivo"
+                        value={payment.name}
+                        onChange={handleChange}
+                        checked={paymentMethodSelected === payment.name}
                       />
                       <label className="form-check-label">
                         <div className="row">
-                          <div className="col-8 text-center">
-                            <img
-                              src={payment.logo}
-                              height="30"
-                              width="auto"></img>
-                          </div>
+                          {
+                            <div className="col-8 text-center">
+                              <img
+                                src={payment.logo}
+                                height="30"
+                                width="auto"></img>
+                            </div>
+                          }
                           <div className="col">{payment.name}</div>
                         </div>
                       </label>
                     </div>
                   ))
                 : ""}
-                <Button type="submit" className="btn-color5 mt-1">
+              <Button type="submit" className="btn-color5 mt-1">
                 Continuar
               </Button>
             </form>

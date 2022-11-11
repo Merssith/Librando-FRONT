@@ -45,7 +45,7 @@ const Shipping = () => {
   }, [shippingAddress]);
 
   return (
-    <section>
+    <section >
       <div className="jumbotron p-1 bg-color3 rounded">
         <h5 className="mt-2">
           <ProgressBar step1 />
