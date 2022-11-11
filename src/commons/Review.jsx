@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Form, Button, Card, ListGroup, Row } from "react-bootstrap";
+import { Form, Button, Card, ListGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import StarRating from "./StarRating/StarRating";
@@ -16,13 +16,9 @@ const Review = ({ book }) => {
   const [comprado, setComprado] = useState(false);
   const [revisado, setRevisado] = useState(false);
   const [reviews, setReviews] = useState([]);
-  console.log(reviews);
 
   // //Crear review
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(e.target[0].value);
-
     axios
       .post(`http://localhost:3001/api/reviews/new`, {
         comment: e.target[0].value,
@@ -31,8 +27,8 @@ const Review = ({ book }) => {
         bookId: book.id,
       })
       .then((res) => {
-        alert(`RESEÑA CREADA: ${res.data.title} ✅`);
-        navigate(`/book/${res.data.id}`);
+        // alert(`RESEÑA CREADA: ${res.data.title} ✅`);
+        navigate(`/book/${book.id}`);
       });
   };
 
@@ -57,8 +53,8 @@ const Review = ({ book }) => {
   };
 
   useEffect(() => {
-   setComprado (buscarComprados());
-   setRevisado  (buscarRevisado());
+    setComprado(buscarComprados());
+    setRevisado(buscarRevisado());
   }, [orders, reviews]);
 
   // Traer todas las reseñas de un libro
@@ -69,49 +65,58 @@ const Review = ({ book }) => {
         .get(`http://localhost:3001/api/order/userOrders/${user.id}`)
         .then((res) => res.data)
         .then((orders) => setOrders(orders))
-        // .then(() => setComprado(buscarComprados()))
-        .then(() =>
-          axios
-            .get(`http://localhost:3001/api/reviews/${book.id}`)
-            .then((res) => res.data)
-            .then((reviews) => setReviews(reviews))
-            // .then(() => setRevisado(buscarRevisado()))
-        );
+
+        .then(() => {
+          if (book.id)
+            axios
+              .get(`http://localhost:3001/api/reviews/${book.id}`)
+              .then((res) => res.data)
+              .then((reviews) => setReviews(reviews));
+        });
   }, [user, book]);
 
-  // //traer usuarios por id para ver sus reviews
-  // axios
-  //   .get(`http://localhost:3001/api/users/get/${reviews[0].id}`)
-  //   .then((res) => console.log(res.data));
+  const estrellas = (num) => {
+    if (num == 1) {
+      return "⭐";
+    }
+    if (num == 2) {
+      return "⭐⭐";
+    }
+    if (num == 3) {
+      return "⭐⭐⭐";
+    }
+    if (num == 4) {
+      return "⭐⭐⭐⭐";
+    }
+    if (num == 5) {
+      return "⭐⭐⭐⭐⭐";
+    }
+  };
 
   return (
     //input para agregar review
     <>
       <p>
-        Lo compro? {comprado.toString().toUpperCase()} Hizo review?
-        {revisado.toString().toUpperCase()}
+        {/* Lo compro? {comprado.toString().toUpperCase()} Hizo review? */}
+        {/* {revisado.toString().toUpperCase()} */}
       </p>
       {comprado && !revisado ? (
         <Form onSubmit={handleSubmit} className="mt-4">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>
               <h3>Dejar reseña</h3>
             </Form.Label>
-            <Form.Control type="text" placeholder="Enter email" />
+            <Form.Control type="text" placeholder="Contanos que te parecio!" />
           </Form.Group>
-
-          <h3>Puntuacion</h3>
+          <h5>Puntuacion</h5>
           <StarRating
             count={5}
             value={rating}
             newRating={newRating}
             edit={true}
           />
-          <div>{rating}</div>
+
           <hr />
-          {/* <h2>Puntuacion no editable (fija)</h2>
-       <StarRating count={5} value={3} newRating={newRating} edit={false}/>
-       <br></br> */}
 
           <Button variant="color5" type="submit">
             Enviar
@@ -129,11 +134,14 @@ const Review = ({ book }) => {
           <Card key={i}>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <strong>{review.userId}</strong>
+                <strong>{review.user.name}</strong>
               </ListGroup.Item>
               <ListGroup.Item>{review.comment}</ListGroup.Item>
+
+              <ListGroup.Item>
+                Puntuacion: {estrellas(review.rate)}
+              </ListGroup.Item>
             </ListGroup>
-            <p>Puntuacion: {review.rate} </p>
           </Card>
         );
       })}
@@ -141,6 +149,4 @@ const Review = ({ book }) => {
   );
 };
 
-//color={{filled: "rgb(136 87 25)", unfilled: "rgb(214 184 147)"}}
-//count={10}
 export default Review;

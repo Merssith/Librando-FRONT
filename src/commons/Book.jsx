@@ -1,10 +1,12 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Container, Col, Row, Stack, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../state/actions/cartActions";
 
 function Book({ book, history }) {
   const dispatch = useDispatch();
+  const [puntuacion, setPuntuacion] = useState (0)
 
   const handleAddToCart = () => {
     dispatch(addToCart(book));
@@ -13,6 +15,22 @@ function Book({ book, history }) {
   const handleGoBack = () => {
     window.history.back();
   };
+
+  const estrellas = (num) =>{
+  if(num ==1){return "⭐"}
+  if(num ==2){return "⭐⭐"}
+  if(num ==3){return "⭐⭐⭐"}
+  if(num ==4){return "⭐⭐⭐⭐"}
+  if(num ==5){return "⭐⭐⭐⭐⭐"} }
+
+  useEffect(() => {
+      axios
+        .get(`http://localhost:3001/api/reviews/rates/${book.id}`)
+        .then((res) => res.data[0].promedio)
+        .then((promedio) => setPuntuacion(promedio))  
+      }, [book]);
+
+
 
   return (
     <div className="table-responsive">
@@ -49,7 +67,7 @@ function Book({ book, history }) {
                 <strong>Editorial:</strong> {book.editorial}
               </p>
               <p>
-                <strong>Rate:</strong> ⭐⭐⭐⭐
+                <strong>Rate:</strong> {puntuacion ? estrellas(puntuacion) : "No hay criticas aún"}
               </p>
               <p>
                 <strong>Stock:</strong> {book.stock}
