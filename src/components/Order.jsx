@@ -1,8 +1,9 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import useInput from "../hooks/useInput";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Table } from "react-bootstrap";
 
 const Order = ({ user }) => {
   const order = useLocation().state;
@@ -69,6 +70,52 @@ const Order = ({ user }) => {
           ""
         )}
       </ul>
+      <div className="table-responsive">
+        <Table striped hover size="sm" responsive>
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Libro</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {order.book_orders.map((product) => (
+              <tr>
+                <td>
+                  <Link to={`/book/${product.bookId}`} className="text-color6">
+                    <img
+                      src={product.book.front}
+                      alt="Portada"
+                      width="100px"
+                      height="auto"
+                    />
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/book/${product.bookId}`} className="text-color6">
+                    <strong>{product.book.title}</strong>
+                  </Link>
+                  <br />
+                  <small>
+                    {product.book.description.slice(0, 200).concat("...")}
+                  </small>
+                </td>
+                <td className="text-center text-center">
+                  <br />
+                  <br />${product.total.toFixed(2)}
+                </td>
+                <td className="text-center">
+                  <br />
+                  <br />
+                  {product.quantity}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </>
   );
 };

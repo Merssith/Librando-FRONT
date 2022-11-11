@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const ListOrders = ({ orders }) => {
+  const user = useSelector((state) => state.user);
   return (
     <div className="table-responsive">
       <h6>
@@ -41,7 +43,14 @@ const ListOrders = ({ orders }) => {
                   <td>{new Date(order.createdAt).toDateString()}</td>
                   <td>{order.total}</td>
                   <td className="text-center">
-                    <Link to={`/user/order/${order.id}`} state={order}>
+                    <Link
+                      to={
+                        user.isAdmin
+                          ? `/admin/orders/edit/${order.id}`
+                          : `/user/order/${order.id}`
+                      }
+                      state={order}
+                    >
                       <i className="bi bi-ticket-detailed"></i>
                     </Link>
                   </td>
