@@ -54,7 +54,7 @@ const PlaceOrder = () => {
             <h6 className="fw-bold mb-4">Confirmar compra</h6>
           </div>
         </div>
-        <Button type="submit" className="btn-color5 mt-1 ms-5">
+        <Button onClick={handleConfirm} className="btn-color5 mt-1 ms-5">
           Continuar
         </Button>
       </div>
