@@ -1,12 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ADD_TO_CART } from "../state/constants/cartConstants";
 import { removeFromCart } from "../state/actions/cartActions";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -26,13 +29,22 @@ const Cart = () => {
     });
   };
 
-  const handleCheckout = (e) => {
-
-  }
+  const handleCheckout = () => {
+    console.log(user)
+    if (user && user.id) {
+      console.log("SHIPPING")
+      navigate("/shipping");
+      
+    } else {
+      console.log("LOGIN")
+      navigate("/login");
+      
+    }
+  };
 
   return (
     <section className="cart-page">
-      <h1 className="mb-3">Carrito</h1>
+      <h1 className="mb-3 pt-1">Carrito</h1>
       <Container>
         <Row>
           <Col md={8}>
@@ -52,7 +64,7 @@ const Cart = () => {
                     <td>
                       <Link to={`/book/${product.id}`} className="text-color6">
                         <img
-                        className="img-fluid w-100 img-thumbnail"
+                          className="img-fluid w-100 img-thumbnail"
                           src={product.front}
                           alt="Portada"
                           style={{ maxWidth: "500px" }}

@@ -1,9 +1,7 @@
 import React from "react";
-import { FaHandPointRight, FaHandPointLeft } from "react-icons/fa";
 import "../css/pagination.css";
 
 const Pagination = ({ page, setPage, max, input, setInput }) => {
-
   const nextPage = () => {
     setInput(input + 1);
     setPage(page + 1);
@@ -35,8 +33,11 @@ const Pagination = ({ page, setPage, max, input, setInput }) => {
 
   return (
     <div>
-      <button disabled={page === 1 || page < 1} onClick={prevPage}>
-        <FaHandPointLeft />
+      <button
+        disabled={page === 1 || page < 1}
+        onClick={prevPage}
+        className="bg-color3">
+        <i class="bi bi-arrow-left"></i>
       </button>
       <input
         className="inputPag"
@@ -51,8 +52,8 @@ const Pagination = ({ page, setPage, max, input, setInput }) => {
       <button
         disabled={page === Math.ceil(max) || page > max}
         onClick={nextPage}
-      >
-        <FaHandPointRight />
+        className="bg-color3">
+        <i class="bi bi-arrow-right"></i>
       </button>
     </div>
   );
