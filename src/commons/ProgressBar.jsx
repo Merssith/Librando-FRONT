@@ -12,8 +12,9 @@ const ProgressBar = ({ step1, step2, step3 }) => {
                 to="/shipping"
                 onClick={(e) => e.preventDefault()}
                 style={{ textDecoration: "none" }}
-                className="text-color5 ps-2">
-                <i class="bi bi-mailbox"></i> Envío
+                className="text-color5 ps-2"
+              >
+                <i className="bi bi-mailbox"></i> Envío
               </Link>
             </li>
           ) : (
@@ -22,7 +23,8 @@ const ProgressBar = ({ step1, step2, step3 }) => {
                 to="/#"
                 onClick={(e) => e.preventDefault()}
                 style={{ textDecoration: "none", cursor: "not-allowed" }}
-                className="text-muted ps-2">
+                className="text-muted ps-2"
+              >
                 Envío
               </Link>
             </li>
@@ -34,8 +36,9 @@ const ProgressBar = ({ step1, step2, step3 }) => {
                 to="/payment"
                 onClick={(e) => e.preventDefault()}
                 style={{ textDecoration: "none" }}
-                className="text-color5 ps-2">
-                <i class="bi bi-currency-dollar"></i> Pago
+                className="text-color5 ps-2"
+              >
+                <i className="bi bi-currency-dollar"></i> Pago
               </Link>
             </li>
           ) : (
@@ -44,7 +47,8 @@ const ProgressBar = ({ step1, step2, step3 }) => {
                 to="/#"
                 onClick={(e) => e.preventDefault()}
                 style={{ textDecoration: "none", cursor: "not-allowed" }}
-                className="text-muted ps-2">
+                className="text-muted ps-2"
+              >
                 Pago
               </Link>
             </li>
@@ -56,8 +60,9 @@ const ProgressBar = ({ step1, step2, step3 }) => {
                 to="/placeOrder"
                 onClick={(e) => e.preventDefault()}
                 style={{ textDecoration: "none" }}
-                className="text-color5 ps-2">
-                <i class="bi bi-send"></i> Enviar orden
+                className="text-color5 ps-2"
+              >
+                <i className="bi bi-send"></i> Enviar orden
               </Link>
             </li>
           ) : (
@@ -66,7 +71,8 @@ const ProgressBar = ({ step1, step2, step3 }) => {
                 to="/#"
                 onClick={(e) => e.preventDefault()}
                 style={{ textDecoration: "none", cursor: "not-allowed" }}
-                className="text-muted ps-2">
+                className="text-muted ps-2"
+              >
                 Enviar Orden
               </Link>
             </li>

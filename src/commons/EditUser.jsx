@@ -47,7 +47,7 @@ const EditUser = () => {
     <>
       {id ? (
         <h2 className="mb-5">
-          Editar <i class="bi bi-pencil"></i>
+          Editar <i className="bi bi-pencil"></i>
         </h2>
       ) : (
         ""

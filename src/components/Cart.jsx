@@ -30,15 +30,10 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    console.log(user)
     if (user && user.id) {
-      console.log("SHIPPING")
       navigate("/shipping");
-      
     } else {
-      console.log("LOGIN")
       navigate("/login");
-      
     }
   };
 
@@ -101,8 +96,9 @@ const Cart = () => {
                       <Button
                         size="sm"
                         variant="color5"
-                        onClick={() => dispatch(removeFromCart(product))}>
-                        <i class="bi bi-trash3"></i>
+                        onClick={() => dispatch(removeFromCart(product))}
+                      >
+                        <i className="bi bi-trash3"></i>
                       </Button>
                     </td>
                   </tr>
@@ -130,8 +126,8 @@ const Cart = () => {
                 )
                 .toFixed(2)}
             </p>
-            <div class="d-grid gap-2">
-              <button className="btn btn-color5" onClick={handleCheckout} >
+            <div className="d-grid gap-2">
+              <button className="btn btn-color5" onClick={handleCheckout}>
                 Ir a pagar
               </button>
             </div>

@@ -36,8 +36,9 @@ const Pagination = ({ page, setPage, max, input, setInput }) => {
       <button
         disabled={page === 1 || page < 1}
         onClick={prevPage}
-        className="bg-color3">
-        <i class="bi bi-arrow-left"></i>
+        className="bg-color3"
+      >
+        <i className="bi bi-arrow-left"></i>
       </button>
       <input
         className="inputPag"
@@ -52,8 +53,9 @@ const Pagination = ({ page, setPage, max, input, setInput }) => {
       <button
         disabled={page === Math.ceil(max) || page > max}
         onClick={nextPage}
-        className="bg-color3">
-        <i class="bi bi-arrow-right"></i>
+        className="bg-color3"
+      >
+        <i className="bi bi-arrow-right"></i>
       </button>
     </div>
   );

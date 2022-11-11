@@ -24,7 +24,6 @@ const AdminUsers = () => {
       .get("http://localhost:3001/api/users", { withCredentials: true })
       .then((res) => res.data)
       .then((usr) => {
-        console.log(usr);
         setUsers(usr);
       });
   };

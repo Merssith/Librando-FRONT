@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import ProgressBar from "../commons/ProgressBar";
 import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../state/actions/cartActions";
+import { clearOrder } from "../state/actions/orderActions";
 
 const PlaceOrder = () => {
-  const { paymentMethod } = useLocation().state;
   const user = useSelector((state) => state.user);
   const { cart } = useSelector((state) => state.cart);
-  //const { paymentMethod } = useSelector((state) => state.order);
+  const { paymentMethod, shippingAdress } = useSelector((state) => state.order);
   const navigate = useNavigate();
-  console.log(paymentMethod);
+  const dispatch = useDispatch();
 
   const handleConfirm = () => {
     if (cart) {
@@ -25,11 +27,12 @@ const PlaceOrder = () => {
       axios
         .post("http://localhost:3001/api/orderCreator", {
           userData: [{ id: user.id }],
-          orderData: [{ paymentMethod }],
+          orderData: [{ paymentMethodId: paymentMethod }],
           bookOrdersData,
         })
         .then(() => {
-          console.log("vaciar carrito");
+          dispatch(clearOrder());
+          dispatch(clearCart());
           alert("Gracias por elegirnos");
           navigate("/");
         });
@@ -51,7 +54,7 @@ const PlaceOrder = () => {
             <h6 className="fw-bold mb-4">Resumen</h6>
             <p>Podés revisar el pedido en tu perfil.</p>
             <p>Gracias por elegirnos.</p>
-            <p>FUNCIONALIDAD: vaciar carrito de redux y localStorage</p>
+            <p>Direccion: {shippingAdress}</p>
           </div>
         </div>
         <Button className="btn-color5 mt-1" onClick={handleConfirm}>
