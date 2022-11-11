@@ -22,25 +22,13 @@ const AdminBooks = () => {
       .get(`http://localhost:3001/api/books/`)
       .then((res) => res.data)
       .then((books) => {
-        console.log(books);
         setLibros(books);
       });
   };
 
-  //para la paginacion
-  let active = 1;
-  let items = [];
-  for (let number = 1; number <= 7; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>
-    );
-  }
 
   // evento de "soft delete", es decir no es un delete sino un update
   const deleteBook = (id) => {
-    console.log("ESTOOOOOO ES ID",id);
     axios
       .put(`http://localhost:3001/api/books/delete/${id}`, { withCredentials: true })
       .then(() => {

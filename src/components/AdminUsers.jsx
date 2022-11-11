@@ -7,7 +7,7 @@ import {
   FcFlashOff,
 } from "react-icons/fc";
 import { Link } from "react-router-dom";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -45,10 +45,10 @@ const AdminUsers = () => {
   return (
     <div>
       <Link to="createuser">
-        <button>
+        <Button variant="color5" size="sm">
           Create admin user
           <FcAndroidOs />
-        </button>
+        </Button>
       </Link>
       <div className="table-responsive" style={{ padding: "5%" }}>
         <Table striped bordered hover variant="dark">

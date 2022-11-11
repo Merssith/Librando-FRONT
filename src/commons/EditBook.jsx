@@ -20,10 +20,13 @@ const EditBook = () => {
 
   const libro = location.state;
 
+  const handleGoBack = () => {
+    window.history.back();
+  };
+
   //traigo todos los generos
   useEffect(() => {
     axios.get(`http://localhost:3001/api/genres`, { withCredentials: true }).then((res) => {
-      // console.log(res.data);
       setGeneros(res.data);
     });
   }, []);
@@ -45,7 +48,7 @@ const EditBook = () => {
 
     //edito libro ya existente
     if (libro) {
-      // console.log(e.target[0].value);
+     
       axios
         .put(`http://localhost:3001/api/books/change/${libro.id}`, {
           title: e.target[0].value,
@@ -80,7 +83,6 @@ const EditBook = () => {
           price: e.target[7].value,
         },{ withCredentials: true })
         .then((res) => {
-          console.log(res);
           alert(`LIBRO NUEVO CREADO: ${res.data.title} ✅`);
           navigate(`/book/${res.data.id}`);
         });
@@ -89,15 +91,19 @@ const EditBook = () => {
 
   return (
     <>
+     <Button variant="color5" size="sm" onClick={handleGoBack}>
+              Volver
+            </Button>
+            <br></br><br></br>
     <div className="table-responsive">
       {" "}
       {libro ? (
         <h2 className="mb-5">
-          EDITAR LIBRO <i class="bi bi-pencil"></i>
+          EDITAR LIBRO <i className="bi bi-pencil"></i>
         </h2>
       ) : (
         <h2 className="mb-5">
-          AGREGAR NUEVO LIBRO <i class="bi bi-file-earmark-plus"></i>
+          AGREGAR NUEVO LIBRO <i className="bi bi-file-earmark-plus"></i>
         </h2>
       )}
       <div style={{ width:"80%", marginLeft: "40px"}}>
@@ -115,7 +121,7 @@ const EditBook = () => {
 
           {/* <Form.Control defaultValue={libro?libro.genre.name: ""} />  */}
 
-          <Form.Select class="form-select" required aria-label="select example" onChange={handleSelect}>
+          <Form.Select className="form-select" required aria-label="select example" onChange={handleSelect}>
             <option selected disabled >Elegir...</option>
             {generos.map((genero, i) => {
               return <option key={i}>{genero.name}</option>;
