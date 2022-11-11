@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 import axios from "axios";
 
 import ListOrders from "../commons/ListOrders";
 
-const User = ({ user }) => {
-  const navigate = useNavigate();
+const User = ({ userId }) => {
   const [orders, setOrders] = useState([]);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
+    if (userId);
     axios
-      .get(`http://localhost:3001/api/order/userOrders/${user.id}`)
+      .get(`http://localhost:3001/api/users/get/${userId}`, {
+        withCredentials: true,
+      })
       .then((res) => res.data)
-      .then((orders) => setOrders(orders));
-  }, [user]);
+      .then((user) => setUser(user))
+      .then(
+        axios
+          .get(`http://localhost:3001/api/order/userOrders/${userId}`)
+          .then((res) => res.data)
+          .then((orders) => setOrders(orders))
+      );
+  }, [userId]);
 
-  return user.id ? (
+  return userId ? (
     <>
       <h5>
         <strong>Perfil de usuario</strong>
@@ -33,12 +42,13 @@ const User = ({ user }) => {
         <strong>Email</strong>: {user.email}
       </h6>
       <h6>
-        <strong>Direccion</strong>: {user.address}
+        <strong>Address</strong>:{" "}
+        {user.address ? user.address.split(",").join(" ") : ""}
       </h6>
       <ListOrders orders={orders} />
     </>
   ) : (
-    navigate("/")
+    <Navigate to="/" />
   );
 };
 

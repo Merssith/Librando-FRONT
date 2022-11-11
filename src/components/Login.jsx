@@ -25,7 +25,9 @@ const Login = () => {
     // seteamos el user en redux y redirigimos al home si todo va bien
     dispatch(
       sendLoginRequest({ email: email.value, password: password.value })
-    ).then(() => navigate("/"));
+    ).then((res) => {
+      if (res.payload) navigate("/");
+    });
   };
 
   const handleClick = () => {

@@ -20,7 +20,7 @@ const Payment = () => {
       .then((res) => res.data)
       .then((payments) => setPayments(payments));
   }, []);
-
+  
   useEffect(() => {
     if (paymentMethod) {
       setPaymentMethodSelected(paymentMethod);
@@ -51,8 +51,8 @@ const Payment = () => {
             <h6 className="fw-bold mb-4">Pago</h6>
             <form onSubmit={handleSubmit}>
               {payments
-                ? payments.map((payment) => (
-                    <div className="form-check mb-3">
+                ? payments.map((payment, i) => (
+                    <div className="form-check mb-3" key={i}>
                       <input
                         className="form-check-input"
                         type="radio"
@@ -63,14 +63,14 @@ const Payment = () => {
                       />
                       <label className="form-check-label">
                         <div className="row">
-                          {
+   
                             <div className="col-8 text-center">
                               <img
                                 src={payment.logo}
                                 height="30"
                                 width="auto"></img>
                             </div>
-                          }
+
                           <div className="col">{payment.name}</div>
                         </div>
                       </label>

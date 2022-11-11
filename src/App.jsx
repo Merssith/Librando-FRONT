@@ -49,13 +49,13 @@ const App = () => {
         ) : (
           ""
         )}
-         <Col md={ user.isAdmin ? 9 : 12}>
+        <Col md={user.isAdmin ? 9 : 12}>
           <Container fluid="md my-4">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/user" element={<User user={user} />} />
+              <Route path="/user" element={<User userId={user.id} />} />
               <Route path="/user/order/:id" element={<Order user={user} />} />
               <Route path="/book/:id" element={<Content />} />
               <Route path="/books/:type" element={<Grid />} />
@@ -66,9 +66,9 @@ const App = () => {
               <Route path="/payment" element={<Payment />} />
               <Route path="/placeOrder" element={<PlaceOrder />} />
               <Route path="/admin/users" element={<AdminUsers />} />
-              <Route path="/admin/books"  element={<AdminBooks />} />
-              <Route path="/admin/books/edit/:id"   element={<EditBook />} />
-              <Route path="/admin/books/create"  element={<EditBook />} />
+              <Route path="/admin/books" element={<AdminBooks />} />
+              <Route path="/admin/books/edit/:id" element={<EditBook />} />
+              <Route path="/admin/books/create" element={<EditBook />} />
               <Route
                 path="/admin/genres"
                 element={<AdminGenres user={user} />}

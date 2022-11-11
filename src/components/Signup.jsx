@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 const Signup = () => {
   const user = useSelector((state) => state.user);
   const [validated, setValidated] = useState(false);
+  const [admin, setAdmin] = useState(false);
   const name = useInput();
   const lastname = useInput();
   const dni = useInput();
@@ -23,14 +24,12 @@ const Signup = () => {
   const city = useInput();
   const state = useInput();
   const cpa = useInput();
-  const [admin, setAdmin] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // si ya hay un usuario logueado redirige a home
   useEffect(() => {
-    if (user.id && user.isAdmin === false) navigate("/");
-    else return;
+    if (user.id && !user.isAdmin) navigate("/");
   });
 
   const handleSubmit = (e) => {
@@ -61,14 +60,17 @@ const Signup = () => {
             navigate("/");
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          const detail = error.response.data.original.detail;
+          alert(detail);
+        });
     }
     setValidated(true);
   };
 
   return (
     <>
-      {user.id && user.isAdmin === true ? (
+      {user.id && user.isAdmin ? (
         <>
           <h2>Hola {user.name},</h2> <p>puedes crear desde aqui!</p>
         </>
@@ -82,7 +84,6 @@ const Signup = () => {
               <Link to="/login" className="text-color6">
                 Ingresá
               </Link>
-              .
             </small>
           </p>
         </div>
@@ -147,12 +148,7 @@ const Signup = () => {
         <Row className="mb-3">
           <Form.Group as={Col} md="8" controlId="validationCustom04">
             <Form.Label>Calle</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Calle"
-              required
-              {...dir}
-            />
+            <Form.Control type="text" placeholder="Calle" required {...dir} />
             <Form.Control.Feedback type="invalid">
               Por favor introduce una calle.
             </Form.Control.Feedback>

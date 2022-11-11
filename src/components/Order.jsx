@@ -36,21 +36,25 @@ const Order = ({ user }) => {
         <h6>
           <strong>Usuario:</strong>
         </h6>
-        <li clasName="ps-3">
+        <li className="ps-3">
           Nombre: {order.user.name} {order.user.lastname}
         </li>
-        <li>Email: {order.user.email}</li>
-        <li>DNI: {order.user.dni}</li>
-        <li>Dirección: {order.user.address.split(",").join(" ")}</li>
+        <li className="ps-3">Email: {order.user.email}</li>
+        <li className="ps-3">DNI: {order.user.dni}</li>
+        <li className="ps-3">
+          Dirección: {order.user.address.split(",").join(" ")}
+        </li>
       </ul>
       <ul style={{ listStyleType: "none" }}>
         <h6>
           <strong>Pedido:</strong>
         </h6>
-        <li>Fecha: {new Date(order.createdAt).toDateString()}</li>
-        <li>Pago: {order.payment.name}</li>
-        <li>Total: ${order.total}</li>
-        <li>Estado: {order.status.name}</li>
+        <li className="ps-3">
+          Fecha: {new Date(order.createdAt).toDateString()}
+        </li>
+        <li className="ps-3">Pago: {order.payment.name}</li>
+        <li className="ps-3">Total: ${order.total}</li>
+        <li className="ps-3">Estado: {order.status.name}</li>
         {user.isAdmin ? (
           <>
             <li>
@@ -82,7 +86,7 @@ const Order = ({ user }) => {
           </thead>
           <tbody>
             {order.book_orders.map((product) => (
-              <tr>
+              <tr key={product.id}>
                 <td>
                   <Link to={`/book/${product.bookId}`} className="text-color6">
                     <img
