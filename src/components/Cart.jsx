@@ -54,8 +54,8 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody>
-                {cart.map((product) => (
-                  <tr>
+                {cart.map((product, i) => (
+                  <tr key={i}>
                     <td>
                       <Link to={`/book/${product.id}`} className="text-color6">
                         <img
