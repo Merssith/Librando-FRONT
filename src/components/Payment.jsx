@@ -6,7 +6,7 @@ import ProgressBar from "../commons/ProgressBar";
 import { useNavigate } from "react-router";
 
 const Payment = () => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [payments, setPayments] = useState([]);
 
@@ -17,10 +17,12 @@ const navigate = useNavigate()
       .then((payments) => setPayments(payments));
   }, []);
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/placeOrder");
-}
+    let paymentMethod = e.target.paymentMethod.value;
+    if (paymentMethod) navigate("/placeOrder", { state: { paymentMethod } });
+    else alert("Elige un método de pago");
+  };
 
   return (
     <section>
@@ -35,21 +37,23 @@ const handleSubmit = (e) => {
             <h6 className="fw-bold mb-4">Pago</h6>
             <form onSubmit={handleSubmit}>
               {payments
-                ? payments.map((payment) => (
-                    <div className="form-check mb-3">
+                ? payments.map((payment, i) => (
+                    <div className="form-check mb-3" key={i}>
                       <input
                         className="form-check-input"
                         type="radio"
                         name="paymentMethod"
-                        value="Efectivo"
+                        value={payment.id}
                       />
                       <label className="form-check-label">
                         <div className="row">
                           <div className="col-8 text-center">
                             <img
                               src={payment.logo}
+                              alt="logo"
                               height="30"
-                              width="auto"></img>
+                              width="auto"
+                            ></img>
                           </div>
                           <div className="col">{payment.name}</div>
                         </div>
@@ -57,7 +61,7 @@ const handleSubmit = (e) => {
                     </div>
                   ))
                 : ""}
-                <Button type="submit" className="btn-color5 mt-1">
+              <Button type="submit" className="btn-color5 mt-1">
                 Continuar
               </Button>
             </form>

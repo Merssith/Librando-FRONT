@@ -100,8 +100,9 @@ const NavBar = ({ user }) => {
               variant="outline-color5"
               size="sm"
               className="mt-2"
-              type="submit">
-              <i class="bi bi-search"></i>
+              type="submit"
+            >
+              <i className="bi bi-search"></i>
             </Button>
           </Form>
           <Nav>
