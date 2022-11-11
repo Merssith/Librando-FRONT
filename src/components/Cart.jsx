@@ -33,7 +33,7 @@ const Cart = () => {
     if (user && user.id) {
       navigate("/shipping");
     } else {
-      navigate("/login");
+      navigate("/login", { state: "/cart" });
     }
   };
 
