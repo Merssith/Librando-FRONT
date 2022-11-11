@@ -21,7 +21,7 @@ const Content = () => {
   return (
     <div>
       <Book book={libro} />
-     <Review /> 
+     <Review book={libro} /> 
     </div>
   );
 };

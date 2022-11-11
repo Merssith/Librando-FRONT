@@ -15,7 +15,7 @@ function Book({ book, history }) {
   };
 
   return (
-    <div>
+    <div className="table-responsive">
       <Container>
         <Row>
           <Col md={1}>

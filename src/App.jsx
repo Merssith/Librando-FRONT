@@ -60,9 +60,9 @@ const App = () => {
               <Route path="/logout" element={<Logout />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/admin/users" element={<AdminUsers />} />
-              <Route path="/admin/books" element={<AdminBooks />} />
-              <Route path="/admin/books/edit/:id" element={<EditBook />} />
-              <Route path="/admin/books/create" element={<EditBook />} />
+              <Route path="/admin/books"  element={<AdminBooks />} />
+              <Route path="/admin/books/edit/:id"   element={<EditBook />} />
+              <Route path="/admin/books/create"  element={<EditBook />} />
               <Route
                 path="/admin/genres"
                 element={<AdminGenres user={user} />}
